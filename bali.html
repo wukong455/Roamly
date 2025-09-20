@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Roamly.png" />
+    <title>Bali Tropical Escape | Roamly</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Destination Hero */
+        .destination-hero {
+            height: 80vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('baliimage.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .hero-breadcrumb a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero-breadcrumb span {
+            margin: 0 10px;
+            color: #ddd;
+        }
+
+        /* Destination Overview */
+        .destination-overview {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .overview-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .overview-text h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .highlight-list {
+            margin-top: 30px;
+        }
+
+        .highlight-list li {
+            margin-bottom: 15px;
+            list-style: none;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .highlight-list li::before {
+            content: '✓';
+            color: var--secondary-color;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .overview-image {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .secondary-image {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            border: 5px solid white;
+        }
+
+        /* Itinerary Section */
+        .itinerary {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .itinerary-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -1px;
+            left: 0;
+        }
+
+        .itinerary-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .itinerary-day {
+            margin-bottom: 40px;
+        }
+
+        .itinerary-day h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .day-activities li {
+            margin-bottom: 15px;
+            list-style-position: inside;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Accommodations */
+        .accommodations {
+            padding: 80px 0;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .hotel-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hotel-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.1);
+        }
+
+        .hotel-info {
+            padding: 20px;
+        }
+
+        .hotel-info h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .hotel-rating {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .hotel-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hotel-price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Pricing */
+        .pricing {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-label {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pricing-tier {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .pricing-details ul {
+            margin-bottom: 30px;
+        }
+
+        .pricing-details li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .book-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background-color: #27ae60;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 16px;
+        }
+
+        .accordion-item {
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0,0,0,0.06);
+            overflow: hidden;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .accordion-item.active {
+            border-color: var(--primary-color);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: linear-gradient(180deg, #ffffff, #fafafa);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark-color);
+            border: 0;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .accordion-trigger:focus-visible {
+            outline: 3px solid rgba(52,152,219,.4);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+
+        .accordion-trigger .chev {
+            transition: transform .3s ease;
+            opacity: .8;
+        }
+
+        .accordion-item.active .chev {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s ease;
+            padding: 0 20px;
+            background: #fff;
+        }
+
+        .accordion-item.active .accordion-content {
+            padding: 0 20px 18px;
+        }
+
+        .accordion-content p {
+            margin-top: 16px;
+            color: var(--text-light);
+            line-height: 1.75;
+        }
+
+        /* Small accent strip on active item */
+        .accordion-item.active {
+            box-shadow: 0 6px 24px rgba(52,152,219,0.15);
+            position: relative;
+        }
+
+        .accordion-item.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .primary-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .primary-btn:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px;
+                box-shadow: var(--box-shadow);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .destination-hero {
+                height: 50vh;
+                margin-top: 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .overview-content {
+                grid-template-columns: 1fr;
+            }
+
+            .secondary-image {
+                width: 200px;
+                height: 150px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .itinerary-tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+
+            .itinerary-content {
+                padding: 20px;
+            }
+
+            .pricing-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">R<span>oamly</span></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="destination.html">Destinations</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn" id="menuBtn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Destination Hero Section -->
+    <section class="destination-hero">
+        <div class="hero-content">
+            <h1>Bali Tropical Escape</h1>
+            <p>7 Days | 6 Nights | Guided Tour</p>
+        </div>
+    </section>
+
+    <!-- Destination Overview -->
+    <section class="destination-overview">
+        <div class="container">
+            <div class="overview-content">
+                <div class="overview-text">
+                    <h2>Discover Paradise in Bali</h2>
+                    <p>Immerse yourself in the enchanting beauty of Bali with our 7-day luxury tropical escape. From lush jungles to pristine beaches, ancient temples to vibrant culture - this carefully curated tour showcases the very best of the Island of Gods.</p>
+                    <p>Experience perfect harmony of relaxation and adventure as we take you through sacred temples, emerald rice terraces, and crystal-clear waters teeming with marine life - all while enjoying world-class Balinese hospitality.</p>
+                    
+                    <div class="highlight-list">
+                        <h4>Tour Highlights:</h4>
+                        <ul>
+                            <li>Private sunrise trek up Mount Batur with breakfast cooked by volcanic steam</li>
+                            <li>Luxury beachfront accommodation in Seminyak and Ubud</li>
+                            <li>Traditional Balinese cooking class with a local family</li>
+                            <li>Snorkeling adventure at pristine Nusa Penida island</li>
+                            <li>Sacred water purification ceremony at Tirta Empul Temple</li>
+                            <li>Private sunset cruise with seafood dinner</li>
+                            <li>Spa day featuring authentic Balinese massage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="overview-image">
+                    <img src="mountbatur.webp" alt="Panoramic view of Bali's emerald green rice terraces shining in sunlight with palm trees" class="main-image">
+                    <img src="nusa penida.jpg" alt="Traditional Balinese temple gate surrounded by lush tropical vegetation and blue sky" class="secondary-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section class="itinerary">
+        <div class="container">
+            <div class="section-title">
+                <h2>Detailed Itinerary</h2>
+                <p>Your perfect week in paradise</p>
+            </div>
+            
+            <div class="itinerary-tabs">
+                <button class="tab-button active" data-day="day1">Day 1</button>
+                <button class="tab-button" data-day="day2">Day 2</button>
+                <button class="tab-button" data-day="day3">Day 3</button>
+                <button class="tab-button" data-day="day4">Day 4</button>
+                <button class="tab-button" data-day="day5">Day 5</button>
+                <button class="tab-button" data-day="day6">Day 6</button>
+                <button class="tab-button" data-day="day7">Day 7</button>
+            </div>
+            
+            <div class="itinerary-content">
+                <div class="itinerary-day" id="day1">
+                    <h3>Day 1: Arrival in Bali - Seminyak Beachfront</h3>
+                    <ul class="day-activities">
+                        <li>Arrival at Ngurah Rai International Airport with VIP fast-track service</li>
+                        <li>Private transfer to your luxury beachfront villa in Seminyak</li>
+                        <li>Welcome drink and traditional Balinese blessing ceremony</li>
+                        <li>Leisurely evening to relax by your private pool</li>
+                        <li>Welcome dinner at a renowned beach club with sunset views</li>
+                    </ul>
+                </div>
+                
+                <div class="itinerary-day" id="day2" style="display:none">
+                    <h3>Day 2: Cultural Ubud & Sacred Monkey Forest</h3>
+                    <ul class="day-activities">
+                        <li>Morning transfer to Ubud with stops at Celuk silver village and Batuan Temple</li>
+                        <li>Interactive Balinese cooking class with a local family</li>
+                        <li>Guided walk through the sacred Monkey Forest sanctuary</li>
+                        <li>Visit to the iconic Tegallalang Rice Terraces</li>
+                        <li>Check-in to your luxurious jungle retreat overlooking the Ayung River</li>
+                        <li>Evening traditional Kecak fire dance performance</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day3" style="display:none">
+                    <h3>Day 3: Sunrise Trek & Hot Springs</h3>
+                    <ul class="day-activities">
+                        <li>Early morning trek up Mount Batur for breathtaking sunrise views</li>
+                        <li>Breakfast cooked by volcanic steam at the summit</li>
+                        <li>Relaxation at Toya Devasya natural hot springs</li>
+                        <li>Afternoon return to your hotel for leisure time</li>
+                        <li>Optional spa treatments or river rafting adventure</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day4" style="display:none">
+                    <h3>Day 4: Water Temples & Spiritual Cleansing</h3>
+                    <ul class="day-activities">
+                        <li>Morning visit to Tirta Empul Temple for sacred water purification</li>
+                        <li>Explore the royal water temple of Pura Taman Saraswati</li>
+                        <li>Afternoon visit to a local coffee plantation for luwak coffee tasting</li>
+                        <li>Sunset drinks at the picturesque Campuhan Ridge Walk</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day5" style="display:none">
+                    <h3>Day 5: Nusa Penida Island Adventure</h3>
+                    <ul class="day-activities">
+                        <li>Speedboat transfer to Nusa Penida Island</li>
+                        <li>Snorkeling at Manta Point and Crystal Bay</li>
+                        <li>Visit to Kelingking Beach's famous T-Rex cliff viewpoint</li>
+                        <li>Lunch with ocean views at Angel's Billabong</li>
+                        <li>Return to mainland Bali in the late afternoon</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day6" style="display:none">
+                    <h3>Day 6: Luxury Beach Day & Sunset Cruise</h3>
+                    <ul class="day-activities">
+                        <li>Morning at leisure to enjoy your villa's amenities</li>
+                        <li>Private beach cabana at Potato Head Beach Club</li>
+                        <li>Afternoon Balinese massage at a luxury spa</li>
+                        <li>Charter sunset cruise with cocktails and seafood dinner</li>
+                        <li>Farewell fireworks display</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day7" style="display:none">
+                    <h3>Day 7: Departure</h3>
+                    <ul class="day-activities">
+                        <li>Morning yoga session overlooking the ocean</li>
+                        <li>Free time for last-minute shopping in Seminyak</li>
+                        <li>Private transfer to the airport with VIP Fast Track service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodations Section -->
+    <section class="accommodations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Accommodations</h2>
+                <p>Experience Balinese hospitality at its finest</p>
+            </div>
+            
+            <div class="hotel-grid">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="Seminyak.jpg" alt="Luxury beachfront villa in Seminyak with private pool and modern tropical design">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>The Seminyak Beach Resort & Spa</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Beachfront luxury with private pool villas, world-class spa, and direct access to Seminyak's best beach clubs.</p>
+                        <div class="hotel-price">From $380/night</div>
+                    </div>
+                </div>
+                
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="ubud.webp" alt="Jungle resort in Ubud with infinity pool overlooking the Ayung River valley">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>The Ubud Wilderness Retreat</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Luxurious jungle sanctuary with private villas featuring river views and open-air spa pavilions.</p>
+                        <div class="hotel-price">From $420/night</div>
+                    </div>
+                </div>
+                
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="uluwattu.jpeg" alt="Clifftop luxury resort with oceanview infinity pool and lush tropical gardens">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>Uluwatu Clifftop Villas</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Exclusive clifftop villas with private butlers, breathtaking ocean views, and access to secluded beaches.</p>
+                        <div class="hotel-price">From $550/night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tour Packages</h2>
+                <p>Your perfect Bali experience</p>
+            </div>
+            
+            <div class="pricing-plans">
+                <div class="pricing-card">
+                    <h3 class="pricing-tier">Island Explorer</h3>
+                    <div class="pricing-amount">$1,799</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>6 nights in 4-star accommodations</li>
+                            <li>Daily breakfast</li>
+                            <li>4 guided excursions</li>
+                            <li>Private airport transfers</li>
+                            <li>24/7 concierge service</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-label">Most Popular</div>
+                    <h3 class="pricing-tier">Balinese Dream</h3>
+                    <div class="pricing-amount">$2,499</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>6 nights in 5-star luxury villas</li>
+                            <li>Daily breakfast & 3 dinners</li>
+                            <li>All guided excursions included</li>
+                            <li>Private drivers throughout</li>
+                            <li>Spa credit ($150 per person)</li>
+                            <li>VIP airport fast-track service</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="pricing-tier">Ultimate Paradise</h3>
+                    <div class="pricing-amount">$3,999</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>6 nights in premium pool villas</li>
+                            <li>All meals and premium beverages</li>
+                            <li>Private guided excursions</li>
+                            <li>Helicopter transfers available</li>
+                            <li>Unlimited spa treatments</li>
+                            <li>Personal butler service</li>
+                            <li>Exclusive experiences</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bali Moments</h2>
+                <p>Preview the tropical paradise that awaits you</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="image1.1.webp" alt="Golden sunrise over Mount Batur volcano with mist in the valley below">
+                </div>
+                <div class="gallery-item">
+                    <img src="image1.2.jpg" alt="Ancient Balinese temple surrounded by water with traditional koi ponds">
+                </div>
+                <div class="gallery-item">
+                    <img src="image1.3.jpg" alt="Tropical beach at sunset with palm tree silhouettes and colorful sky">
+                </div>
+                <div class="gallery-item">
+                    <img src="image1.4.webp" alt="Traditional Balinese dancer in ornate costume performing sacred dance">
+                </div>
+                <div class="gallery-item">
+                    <img src="image1.5.jpg" alt="Luxury infinity pool overlooking lush jungle valley in Ubud">
+                </div>
+                <div class="gallery-item">
+                    <img src="image1.6.jpg" alt="Crystal clear waters of Nusa Penida island with tropical fish and coral">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about this tour</p>
+            </div>
+
+            <div class="accordion" role="tablist">
+                <!-- Item 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq1-btn" aria-expanded="false" aria-controls="faq1">
+                        <span>What's the best time of year to visit Bali?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq1" role="region" aria-labelledby="faq1-btn" aria-hidden="true">
+                        <p>The dry season from April to October offers the best weather, but Bali is beautiful year-round. Our tours adjust activities seasonally to ensure the best experience.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq2-btn" aria-expanded="false" aria-controls="faq2">
+                        <span>What should I pack for a Bali trip?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq2" role="region" aria-labelledby="faq2-btn" aria-hidden="true">
+                        <p>Light, breathable clothing, swimwear, comfortable walking shoes, a sun hat, reef-safe sunscreen, and temple-appropriate attire (sarongs provided for temple visits). Don't forget your camera!</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq3-btn" aria-expanded="false" aria-controls="faq3">
+                        <span>Is the Mount Batur trek difficult?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq3" role="region" aria-labelledby="faq3-btn" aria-hidden="true">
+                        <p>The trek is moderate difficulty (2-3 hour hike). Alternative experiences are available for those who prefer not to trek. Our guides accommodate all fitness levels with patience and encouragement.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq4-btn" aria-expanded="false" aria-controls="faq4">
+                        <span>What health precautions should I take?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq4" role="region" aria-labelledby="faq4-btn" aria-hidden="true">
+                        <p>Drink bottled water, use mosquito repellent (especially at dusk), and ensure routine vaccinations are up-to-date. No special immunizations are required for Bali.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq5-btn" aria-expanded="false" aria-controls="faq5">
+                        <span>Can we extend our stay in Bali?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq5" role="region" aria-labelledby="faq5-btn" aria-hidden="true">
+                        <p>Absolutely! We can arrange extensions at any of our recommended properties, or help plan independent travel to other Indonesian islands like the Gili Islands or Komodo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready for Your Tropical Escape?</h2>
+            <p>Experience the magic of Bali with our carefully curated luxury tour package. Limited spaces available for the best dates.</p>
+            <div class="cta-buttons">
+                <a href="booknow bali.html" class="cta-btn primary-btn">Book Your Bali Adventure</a>
+                <a href="#" class="cta-btn secondary-btn">Get More Information</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Roamly</h3>
+                    <p>Making travel dreams come true since 2015. We specialize in curated travel experiences tailored to your preferences.</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Travel Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>105/591, New Haleem Market, Chamanganj, Kanpur</li>
+                        <li>Phone: +91 9336189929</li>
+                        <li>Email: info@roamly.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Roamly Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Itinerary Tab Functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const itineraryDays = document.querySelectorAll('.itinerary-day');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                itineraryDays.forEach(day => day.style.display = 'none');
+
+                button.classList.add('active');
+                const dayId = button.getAttribute('data-day');
+                document.getElementById(dayId).style.display = 'block';
+            });
+        });
+
+        // FAQ Accordion
+        (function () {
+            const items = document.querySelectorAll('.accordion-item');
+
+            function closeAll(except) {
+                items.forEach(item => {
+                    if (item !== except) {
+                        item.classList.remove('active');
+                        const trigger = item.querySelector('.accordion-trigger');
+                        const content = item.querySelector('.accordion-content');
+                        trigger.setAttribute('aria-expanded', 'false');
+                        content.setAttribute('aria-hidden', 'true');
+                        content.style.maxHeight = 0;
+                    }
+                });
+            }
+
+            items.forEach(item => {
+                const trigger = item.querySelector('.accordion-trigger');
+                const content = item.querySelector('.accordion-content');
+
+                // Ensure starting state
+                trigger.setAttribute('aria-expanded', 'false');
+                content.setAttribute('aria-hidden', 'true');
+                content.style.maxHeight = 0;
+
+                trigger.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('active');
+                    closeAll(isOpen ? null : item);
+
+                    if (!isOpen) {
+                        item.classList.add('active');
+                        trigger.setAttribute('aria-expanded', 'true');
+                        content.setAttribute('aria-hidden', 'false');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // Keep height correct on resize (for responsive text wrapping)
+            window.addEventListener('resize', () => {
+                const open = document.querySelector('.accordion-item.active .accordion-content');
+                if (open) open.style.maxHeight = open.scrollHeight + 'px';
+            });
+        })();
+    </script>
+</body>
+</html>

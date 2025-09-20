@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Roamly.png" />
+    <title>Roamly | Discover Your Next Adventure</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a button {
+            background: linear-gradient(90deg, #3498db 60%, #2980b9 100%);
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.12);
+            margin-left: 0;
+        }
+
+        .nav-links a button:hover {
+            background: linear-gradient(90deg, #2980b9 60%, #1c6ea4 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Auth Modal Styles */
+        .modal .auth-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .auth-tabs button {
+            padding: 10px 30px;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .auth-tabs button.active {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .auth-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .social-login {
+            text-align: center;
+        }
+
+        .social-login p {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .social-facebook {
+            background-color: #3b5998;
+        }
+
+        .social-facebook:hover {
+            background-color: #2d4373;
+        }
+
+        .social-google {
+            background-color: #db4437;
+        }
+
+        .social-google:hover {
+            background-color: #a33227;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('landscape.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+        }
+
+        /* Search Form */
+        .search-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: var(--box-shadow);
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .search-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Featured Destinations */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .destination-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .destinations {
+            padding: 80px 0;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .destination-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .destination-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .destination-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .destination-card:hover .destination-img img {
+            transform: scale(1.1);
+        }
+
+        .destination-info {
+            padding: 20px;
+        }
+
+        .destination-info h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .destination-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .destination-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .destination-price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .destination-rating {
+            color: #f39c12;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background-color: var(--primary-color);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .newsletter-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-family: inherit;
+        }
+
+        .newsletter-form button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #27ae60;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popupBounceIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.7);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+
+            80% {
+                transform: translate(-50%, -50%) scale(0.98);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes tada {
+            0% {
+                transform: scale(1);
+            }
+
+            10%,
+            20% {
+                transform: scale(0.9) rotate(-3deg);
+            }
+
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: scale(1.1) rotate(3deg);
+            }
+
+            40%,
+            60%,
+            80% {
+                transform: scale(1.1) rotate(-3deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px;
+                box-shadow: var(--box-shadow);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-form button {
+                border-radius: 5px;
+                padding: 15px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
+        }
+
+        .modal {
+            display: none;
+            /* Hide by default */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background: rgba(44, 62, 80, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            margin: 60px auto;
+            padding: 40px 30px 30px 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+            position: relative;
+            animation: fadeInUp 0.5s;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        #loginBtn {
+            background: linear-gradient(90deg, #3498db 60%, #2980b9 100%);
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.12);
+        }
+
+        #loginBtn:hover {
+            background: linear-gradient(90deg, #2980b9 60%, #1c6ea4 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        /* ...existing code... */
+        .terms-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .terms-group input[type="checkbox"] {
+            margin-top: 3px;
+            margin-right: 4px;
+        }
+
+        .terms-group label {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-left: 0;
+        }
+
+        /* ...existing code... */
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Ro<span>amly</span></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="destination.html">Destinations</a></li>
+                    <li><a href="testimonial.html">Testimonials</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><button id="loginBtn">Login</button></li>
+
+                </ul>
+                <div class="mobile-menu-btn" id="menuBtn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Discover Your Next Adventure</h1>
+                <p>Explore breathtaking destinations with Roamly's expertly crafted tours and travel experiences</p>
+                <a href="#destinations" class="hero-btn">Explore Tours</a>
+
+                <!-- Search Form -->
+                <div class="search-form">
+                    <h3>Find Your Perfect Trip</h3>
+                    <form id="searchForm">
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" id="destination" name="destination"
+                                placeholder="Where would you like to go?">
+                        </div>
+                        <div class="form-group">
+                            <label for="travel-date">Travel Date</label>
+                            <input type="date" id="travel-date" name="travel-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="travel-type">Travel Type</label>
+                            <select id="travel-type" name="travel-type">
+                                <option value="">Any</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="beach">Beach</option>
+                                <option value="cultural">Cultural</option>
+                                <option value="wildlife">Wildlife</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Destinations</h2>
+                <p>Discover our most popular travel destinations handpicked by our expert travel consultants</p>
+            </div>
+            <a href="swissapls.html" class="destination-card-link">
+                <div class="destination-grid">
+                    <div class="destination-card">
+                        <div class="destination-img">
+                            <img src="swissalps.jpg" alt="Majestic Swiss Alps with snow-capped peaks and green valleys">
+                        </div>
+                        <div class="destination-info">
+                            <h3>Swiss Alps Adventure</h3>
+                            <p>Experience the breathtaking beauty of the Swiss Alps with our guided mountain tours</p>
+                            <div class="destination-meta">
+                                <span class="destination-price">$1,299</span>
+                                <span class="destination-rating">★★★★★</span>
+                            </div>
+                        </div>
+                    </div>
+            </a>
+            <a href="bali.html" class="destination-card-link">
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="bali.jpg" alt="Tropical Bali beach with palm trees and turquoise water at sunset">
+                    </div>
+                    <div class="destination-info">
+                        <h3>Bali Tropical Escape</h3>
+                        <p>Relax in luxury resorts and explore Bali's vibrant culture and pristine beaches</p>
+                        <div class="destination-meta">
+                            <span class="destination-price">$899</span>
+                            <span class="destination-rating">★★★★☆</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="japan.html" class="destination-card-link">
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="Kyoto, Japan.jpg"
+                            alt="Ancient Japanese temple surrounded by cherry blossoms in Kyoto">
+                    </div>
+                    <div class="destination-info">
+                        <h3>Japanese Cultural Tour</h3>
+                        <p>Immerse yourself in Japan's rich history and traditions on this unforgettable journey</p>
+                        <div class="destination-meta">
+                            <span class="destination-price">$1,499</span>
+                            <span class="destination-rating">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Roamly provides comprehensive travel services to make your journey unforgettable</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏨</div>
+                    <h3>Luxury Accommodations</h3>
+                    <p>Stay in handpicked hotels and resorts that match your style and budget</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Flight Bookings</h3>
+                    <p>Get the best deals on flights with our extensive airline partnerships</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🍽️</div>
+                    <h3>Local Cuisine</h3>
+                    <p>Experience authentic local flavors at our recommended restaurants</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Travel Insurance</h3>
+                    <p>Comprehensive coverage for your peace of mind while traveling</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Traveler Stories</h2>
+                <p>Don't just take our word for it - hear what our clients have to say about their experiences</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Roamly made my honeymoon unforgettable. Every detail was perfectly arranged, and their local
+                            guides were incredibly knowledgeable. Can't wait to book our next trip with them!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://placehold.co/100x100"
+                                alt="Smiling young couple sitting on a beach at sunset">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah & Michael</h4>
+                            <p>Honeymoon in Maldives</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As a solo female traveler, I felt completely safe and supported throughout my Southeast Asia
+                            adventure with Roamly. Their team was available 24/7 to assist with anything I needed."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://placehold.co/100x100"
+                                alt="Confident young woman standing at Angkor Wat temple complex">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jessica Thompson</h4>
+                            <p>Solo Traveler</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"We've traveled with many companies before, but Roamly truly stands out. Their attention to
+                            detail and personalized service created a seamless family vacation across Europe."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://placehold.co/100x100"
+                                alt="Happy family with two children posing in front of Eiffel Tower">
+                        </div>
+                        <div class="author-info">
+                            <h4>The Rodriguez Family</h4>
+                            <p>Europe Explorer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for exclusive travel deals, destination inspiration, and expert tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Roamly</h3>
+                    <p>Making travel dreams come true since 2015. We specialize in curated travel experiences tailored
+                        to your preferences.</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Travel Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>105/591, New Haleem Market, Chamanganj, Kanpur</li>
+                        <li>Phone: +91 9336189929</li>
+                        <li>Email: info@roamly.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Roamly Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+
+            <!-- Tab Buttons -->
+            <div class="auth-tabs">
+                <button id="loginTab" class="active">Login</button>
+                <button id="signupTab">Signup</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="Name" id="Username" name="Username" placeholder="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Enter your password"
+                        required>
+                </div>
+                <button type="submit" class="auth-btn">Login</button>
+                <div class="social-login">
+                    <p>Or login with:</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-facebook">Facebook</a>
+                        <a href="#" class="social-google">Google</a>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" placeholder="Enter your password"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" name="Confirm Password"
+                        placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPic">Profile Picture (optional)</label>
+                    <input type="file" id="signupPic" accept="image/*">
+                </div>
+                <div class="form-group terms-group">
+                    <input type="checkbox" id="termsCheckbox" required>
+                    <label for="termsCheckbox" style="font-size:14px; line-height: 1.4;">
+                        I accept the <a href="#" style="color:#3498db;text-decoration:underline;">Terms and
+                            Conditions</a>
+                    </label>
+                </div>
+                <button type="submit" class="auth-btn">Signup</button>
+                <div class="social-login">
+                    <p>Or signup with:</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-facebook">Facebook</a>
+                        <a href="#" class="social-google">Google</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Active link highlighting as user scrolls
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('.nav-links li');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(li => {
+                li.classList.remove('active');
+                if (li.querySelector('a').getAttribute('href') === `#${current}`) {
+                    li.classList.add('active');
+                }
+            });
+        });
+
+        // Sticky header on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                if (emailInput.value) {
+                    // Replace form with success message
+                    const parent = this.parentElement;
+                    parent.innerHTML = `
+                <h2>Stay Updated</h2>
+                <p style="margin-bottom:30px;">Subscribe to our newsletter for exclusive travel deals, destination inspiration, and expert tips</p>
+                <div style="padding: 30px; background: #2ecc71; border-radius: 8px; color: #fff; font-size: 1.2em;">
+                    <strong>✅ You have successfully subscribed!</strong>
+                </div>
+            `;
+                } else {
+                    alert('Please enter a valid email address');
+                }
+            });
+        }
+        // Search form redirect to destination.html with query
+        document.getElementById('searchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const dest = document.getElementById('destination').value.trim();
+            const date = document.getElementById('travel-date').value;
+            if (dest) {
+                window.location.href = `destination.html?destination=${encodeURIComponent(dest)}${date ? `&date=${encodeURIComponent(date)}` : ''}`;
+            } else {
+                alert('Please enter a destination.');
+            }
+        });
+
+        // Elements
+        const authModal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('loginBtn');
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            authModal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        });
+
+        const closeBtn = authModal.querySelector('.close-btn');
+
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        // Tab switching
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        });
+
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            authModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scroll
+        });
+
+        // Also close when clicking outside modal content
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // --- SIGNUP HANDLER ---
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const termsAccepted = document.getElementById('termsCheckbox').checked;
+            if (!termsAccepted) {
+                alert('You must accept the Terms and Conditions to sign up.');
+                return;
+            }
+            // Password match validation
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please re-enter.');
+                return;
+            }
+            const username = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+
+            // Save password to localStorage here
+            localStorage.setItem('roamlyUserPassword', password);
+
+            // Handle profile picture
+            const picInput = document.getElementById('signupPic');
+            if (picInput && picInput.files && picInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    localStorage.setItem('roamlyUserPic', event.target.result);
+                    localStorage.setItem('roamlyUser', username);
+                    localStorage.setItem('roamlyUserEmail', email);
+                    // Switch to login tab after signup
+                    loginTab.classList.add('active');
+                    signupTab.classList.remove('active');
+                    loginForm.classList.add('active');
+                    signupForm.classList.remove('active');
+                };
+                reader.readAsDataURL(picInput.files[0]);
+            } else {
+                localStorage.setItem('roamlyUserPic', '');
+                localStorage.setItem('roamlyUser', username);
+                localStorage.setItem('roamlyUserEmail', email);
+                // Switch to login tab after signup
+                loginTab.classList.add('active');
+                signupTab.classList.remove('active');
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+            }
+        });
+
+        // --- LOGIN HANDLER ---
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('Username').value;
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Demo check: compare with stored values
+            const storedUser = localStorage.getItem('roamlyUser');
+            const storedEmail = localStorage.getItem('roamlyUserEmail');
+            const storedPassword = localStorage.getItem('roamlyUserPassword'); // You need to store this on signup!
+
+            if (
+                username === storedUser &&
+                email === storedEmail &&
+                password === storedPassword
+            ) {
+                showGreeting(username);
+                authModal.style.display = 'none';
+                showCustomPopup(`Thank you Mr ${username}, you have successfully logged in!`);
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+        // --- GREETING & LOGOUT ---
+        function showGreeting(name) {
+            const loginBtn = document.getElementById('loginBtn');
+            if (!loginBtn) return;
+            let greetingLi = document.getElementById('userGreeting');
+            if (!greetingLi) {
+                greetingLi = document.createElement('li');
+                greetingLi.id = 'userGreeting';
+                loginBtn.parentElement.parentElement.replaceChild(greetingLi, loginBtn.parentElement);
+            }
+            const userPic = localStorage.getItem('roamlyUserPic');
+            greetingLi.innerHTML = `
+            ${userPic ? `<img id="profilePicNav" src="${userPic}" alt="Profile" style="width:32px;height:32px;border-radius:50%;vertical-align:middle;margin-right:8px;cursor:pointer;">` : ''}
+            <span style="font-weight:600;color:#3498db;vertical-align:middle;">Hello, ${name}!</span>
+            <button id="logoutBtn" style="margin-left:12px;background:#e74c3c;color:#fff;border:none;padding:6px 16px;border-radius:5px;cursor:pointer;font-weight:600;">Logout</button>
+        `;
+            document.getElementById('logoutBtn').onclick = function () {
+                localStorage.removeItem('roamlyUser');
+                localStorage.removeItem('roamlyUserPic');
+                localStorage.removeItem('roamlyUserEmail');
+                const navLinks = document.getElementById('navLinks');
+                const newLoginLi = document.createElement('li');
+                newLoginLi.innerHTML = `<button id="loginBtn">Login</button>`;
+                navLinks.replaceChild(newLoginLi, greetingLi);
+                document.getElementById('loginBtn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById('authModal').style.display = 'block';
+                });
+            };
+
+            // Add click event to profile picture for dashboard
+            if (userPic) {
+                const profilePic = document.getElementById('profilePicNav');
+                if (profilePic) {
+                    profilePic.onclick = function () {
+                        showProfileDashboard();
+                    };
+                }
+            }
+        }
+
+        // --- PROFILE DASHBOARD ---
+        function showProfileDashboard() {
+            // Remove existing dashboard if present
+            const oldDash = document.getElementById('profileDashboard');
+            const oldOverlay = document.getElementById('profileDashboardOverlay');
+            if (oldDash) oldDash.remove();
+            if (oldOverlay) oldOverlay.remove();
+
+            // Overlay
+            const overlay = document.createElement('div');
+            overlay.id = 'profileDashboardOverlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(44,62,80,0.25)';
+            overlay.style.zIndex = '3999';
+            overlay.style.backdropFilter = 'blur(2px)';
+            overlay.onclick = function (e) {
+                if (e.target === overlay) {
+                    dash.remove();
+                    overlay.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            };
+
+            // Dashboard
+            const dash = document.createElement('div');
+            dash.id = 'profileDashboard';
+            dash.style.position = 'fixed';
+            dash.style.top = '50%';
+            dash.style.left = '50%';
+            dash.style.transform = 'translate(-50%, -50%)';
+            dash.style.background = '#fff';
+            dash.style.padding = '0';
+            dash.style.borderRadius = '18px';
+            dash.style.boxShadow = '0 12px 40px rgba(44,62,80,0.18)';
+            dash.style.zIndex = '4000';
+            dash.style.textAlign = 'left';
+            dash.style.width = '1000px';
+            dash.style.maxWidth = '195vw';
+            dash.style.height = '80vh';
+            dash.style.maxHeight = '90vh';
+            dash.style.minHeight = '500px';
+            dash.style.display = 'flex';
+            dash.style.flexDirection = 'column';
+            dash.style.overflowY = 'auto';
+            dash.style.animation = 'popupBounceIn 0.6s cubic-bezier(.68,-0.55,.27,1.55)';
+
+            // Get user data
+            const userPic = localStorage.getItem('roamlyUserPic');
+            const userName = localStorage.getItem('roamlyUser') || '';
+            const userEmail = localStorage.getItem('roamlyUserEmail') || '';
+            const userPhone = localStorage.getItem('roamlyUserPhone') || '+91 9336189929';
+            const loyaltyPoints = parseInt(localStorage.getItem('roamlyUserPoints') || '1200', 10);
+
+            // Demo data for bookings and saved destinations
+            const bookings = JSON.parse(localStorage.getItem('roamlyBookings') || 'null') || [
+                { id: 1, dest: "Swiss Alps Adventure", date: "2025-12-10", status: "Confirmed", details: "7 days, 4-star hotel, all meals included." },
+                { id: 2, dest: "Bali Tropical Escape", date: "2025-11-02", status: "Pending", details: "5 days, beach resort, breakfast included." }
+            ];
+            const saved = JSON.parse(localStorage.getItem('roamlySaved') || 'null') || [
+                { dest: "Japanese Cultural Tour", link: "japan.html" },
+                { dest: "Maldives Paradise", link: "#" }
+            ];
+
+            // Loyalty progress bar
+            const maxPoints = 2000;
+            const percent = Math.min(100, Math.round((loyaltyPoints / maxPoints) * 100));
+
+            dash.innerHTML = `
+    <div style="background:linear-gradient(90deg,#3498db 60%,#2980b9 100%);padding:32px 24px 18px 24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="flex:1;">
+                <div style="font-size:1.1em;color:#e0f7fa;margin-bottom:10px;">
+                    <span style="font-weight:600;color:#fff;">Name:</span> ${userName}
+                </div>
+                <div style="font-size:1.1em;color:#e0f7fa;margin-bottom:10px;">
+                    <span style="font-weight:600;color:#fff;">Email:</span> ${userEmail ? userEmail : ''}
+                </div>
+                <div style="font-size:1.1em;color:#e0f7fa;margin-bottom:10px;">
+                    <span style="font-weight:600;color:#fff;">Mobile:</span> ${userPhone}
+                </div>
+                <div style="margin-top:10px;">
+                    <span style="color:#fff;font-weight:600;">Loyalty Points:</span>
+                    <span style="color:#ffe082;font-weight:700;">${loyaltyPoints}</span>
+                    <div style="background:#eaf6fb;height:8px;border-radius:5px;margin-top:6px;width:90%;max-width:220px;">
+                        <div style="background:#ffe082;height:8px;border-radius:5px;width:${percent}%;"></div>
+                    </div>
+                    <div style="color:#fff;font-size:0.9em;margin-top:2px;">${percent}% to next reward</div>
+                </div>
+            </div>
+            <div style="flex-shrink:0;margin-left:32px;display:flex;align-items:center;justify-content:center;">
+                <img src="${userPic || 'https://placehold.co/100x100'}" alt="Profile" style="width:100px;height:100px;border-radius:50%;box-shadow:0 2px 12px #3498db33;">
+            </div>
+        </div>
+    </div>
+    <div style="padding: 24px 24px 12px 24px;">
+        <h3 style="color:#3498db;font-size:1.1em;margin-bottom:10px;">My Bookings</h3>
+        <div style="background:#f7fafd;border-radius:8px;padding:10px 12px 6px 12px;margin-bottom:18px;max-height:110px;overflow:auto;">
+            ${bookings.length === 0 ? `<div style="color:#888;">No bookings yet.</div>` : bookings.map(b => `
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+                    <span style="font-weight:600;">${b.dest}</span>
+                    <span style="font-size:0.97em;color:#888;">${b.date}</span>
+                    <span style="font-size:0.97em;color:${b.status === 'Confirmed' ? '#2ecc71' : '#f39c12'};font-weight:600;">${b.status}</span>
+                    <button onclick="showBookingDetails(${b.id})" style="margin-left:8px;background:#eaf6fb;color:#3498db;border:none;padding:4px 10px;border-radius:5px;font-size:0.95em;cursor:pointer;">Details</button>
+                </div>
+            `).join('')}
+        </div>
+        <h3 style="color:#3498db;font-size:1.1em;margin-bottom:10px;">Saved Destinations</h3>
+        <div style="background:#f7fafd;border-radius:8px;padding:10px 12px 6px 12px;margin-bottom:10px;max-height:110px;overflow:auto;" id="savedDestinationsList">
+            ${saved.length === 0 ? `<div style="color:#888;">No saved destinations.</div>` : saved.map((s, i) => `
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
+                    <a href="${s.link}" style="color:#2980b9;text-decoration:none;font-weight:600;" target="_blank">${s.dest}</a>
+                    <button onclick="removeSavedDestination(${i})" style="background:#ffe082;color:#b26a00;border:none;padding:2px 8px;border-radius:4px;font-size:0.95em;cursor:pointer;">Remove</button>
+                </div>
+            `).join('')}
+        </div>
+        <div style="background:#eaf6fb;border-radius:8px;padding:10px 12px 12px 12px;margin-bottom:18px;">
+            <div style="font-weight:600;color:#3498db;margin-bottom:6px;">Add a Place</div>
+            <form id="addPlaceForm" style="display:flex;gap:6px;flex-wrap:wrap;">
+                <input type="text" id="newPlaceName" placeholder="Place Name" style="flex:2;padding:6px 8px;border-radius:4px;border:1px solid #ccc;">
+                <input type="url" id="newPlaceLink" placeholder="Link (optional)" style="flex:2;padding:6px 8px;border-radius:4px;border:1px solid #ccc;">
+                <button type="submit" style="flex:1;background:#3498db;color:#fff;border:none;padding:6px 0;border-radius:4px;font-weight:600;cursor:pointer;">Add</button>
+            </form>
+        </div>
+        <h3 style="color:#3498db;font-size:1.1em;margin-bottom:10px;">Profile Actions</h3>
+        <div style="display:flex;gap:10px;margin-bottom:18px;">
+            <button id="editProfileBtn" style="flex:1;background:#eaf6fb;color:#3498db;border:none;padding:8px 0;border-radius:5px;font-weight:600;cursor:pointer;">Edit Profile</button>
+            <button id="logoutProfileBtn" style="flex:1;background:#ffe082;color:#b26a00;border:none;padding:8px 0;border-radius:5px;font-weight:600;cursor:pointer;">Logout</button>
+        </div>
+        <button id="closeProfileDashboard" style="background:linear-gradient(90deg,#3498db 60%,#2980b9 100%);color:#fff;border:none;padding:10px 0;width:100%;border-radius:7px;cursor:pointer;font-weight:600;font-size:1em;box-shadow:0 2px 8px rgba(52,152,219,0.12);transition:background 0.3s,transform 0.2s;">
+            Close
+        </button>
+    </div>
+`;
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(dash);
+            document.body.style.overflow = 'hidden';
+
+            // Add Place tool
+            document.getElementById('addPlaceForm').onsubmit = function (e) {
+                e.preventDefault();
+                const name = document.getElementById('newPlaceName').value.trim();
+                const link = document.getElementById('newPlaceLink').value.trim();
+                if (!name) {
+                    alert('Please enter a place name.');
+                    return;
+                }
+                saved.push({ dest: name, link: link || "#" });
+                localStorage.setItem('roamlySaved', JSON.stringify(saved));
+                showProfileDashboard();
+            };
+
+            // Edit Profile button
+            document.getElementById('editProfileBtn').onclick = function () {
+                editProfile(dash, overlay);
+            };
+
+            // Logout button
+            document.getElementById('logoutProfileBtn').onclick = function () {
+                localStorage.removeItem('roamlyUser');
+                localStorage.removeItem('roamlyUserPic');
+                localStorage.removeItem('roamlyUserEmail');
+                localStorage.removeItem('roamlyUserPhone');
+                localStorage.removeItem('roamlyUserPoints');
+                document.getElementById('closeProfileDashboard').click();
+                // Also update navbar
+                const navLinks = document.getElementById('navLinks');
+                const greetingLi = document.getElementById('userGreeting');
+                if (greetingLi) {
+                    const newLoginLi = document.createElement('li');
+                    newLoginLi.innerHTML = `<button id="loginBtn">Login</button>`;
+                    navLinks.replaceChild(newLoginLi, greetingLi);
+                    document.getElementById('loginBtn').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.getElementById('authModal').style.display = 'block';
+                    });
+                }
+            };
+
+            // Remove saved destination
+            window.removeSavedDestination = function (index) {
+                saved.splice(index, 1);
+                localStorage.setItem('roamlySaved', JSON.stringify(saved));
+                showProfileDashboard();
+            };
+
+            // Booking details popup
+            window.showBookingDetails = function (id) {
+                const booking = bookings.find(b => b.id === id);
+                if (!booking) return;
+                // Simple popup
+                const detailsOverlay = document.createElement('div');
+                detailsOverlay.style.position = 'fixed';
+                detailsOverlay.style.top = '0';
+                detailsOverlay.style.left = '0';
+                detailsOverlay.style.width = '100vw';
+                detailsOverlay.style.height = '100vh';
+                detailsOverlay.style.background = 'rgba(44,62,80,0.25)';
+                detailsOverlay.style.zIndex = '5000';
+                detailsOverlay.onclick = function (e) {
+                    if (e.target === detailsOverlay) detailsOverlay.remove();
+                };
+                const detailsBox = document.createElement('div');
+                detailsBox.style.position = 'fixed';
+                detailsBox.style.top = '50%';
+                detailsBox.style.left = '50%';
+                detailsBox.style.transform = 'translate(-50%, -50%)';
+                detailsBox.style.background = '#fff';
+                detailsBox.style.padding = '32px 24px';
+                detailsBox.style.borderRadius = '12px';
+                detailsBox.style.boxShadow = '0 8px 32px rgba(44,62,80,0.18)';
+                detailsBox.style.zIndex = '5100';
+                detailsBox.style.minWidth = '280px';
+                detailsBox.innerHTML = `
+            <h3 style="color:#3498db;margin-bottom:10px;">${booking.dest}</h3>
+            <div style="margin-bottom:8px;"><strong>Date:</strong> ${booking.date}</div>
+            <div style="margin-bottom:8px;"><strong>Status:</strong> <span style="color:${booking.status === 'Confirmed' ? '#2ecc71' : '#f39c12'}">${booking.status}</span></div>
+            <div style="margin-bottom:18px;"><strong>Details:</strong> ${booking.details}</div>
+            <button onclick="this.parentElement.parentElement.remove()" style="background:linear-gradient(90deg,#3498db 60%,#2980b9 100%);color:#fff;border:none;padding:8px 24px;border-radius:7px;cursor:pointer;font-weight:600;">Close</button>
+        `;
+                detailsOverlay.appendChild(detailsBox);
+                document.body.appendChild(detailsOverlay);
+            };
+
+            document.getElementById('closeProfileDashboard').onclick = function () {
+                dash.remove();
+                overlay.remove();
+                document.body.style.overflow = 'auto';
+            };
+        }
+
+        // --- EDIT PROFILE ---
+        function editProfile(dash, overlay) {
+            const userPic = localStorage.getItem('roamlyUserPic');
+            const userName = localStorage.getItem('roamlyUser') || '';
+            const userEmail = localStorage.getItem('roamlyUserEmail') || '';
+            const userPhone = localStorage.getItem('roamlyUserPhone') || '';
+
+            dash.innerHTML = `
+        <div style="background: linear-gradient(90deg, #3498db 60%, #2980b9 100%); padding: 32px 24px 24px 24px; border-top-left-radius: 18px; border-top-right-radius: 18px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="flex:1;">
+                    <h2 style="color:#fff;font-size:1.4em;font-weight:700;margin-bottom:8px;">Edit Profile</h2>
+                    <p style="color:#e0f7fa;font-size:1em;margin-bottom:0;">Update your details below</p>
+                </div>
+                <div style="flex-shrink:0;margin-left:32px;display:flex;align-items:center;justify-content:center;">
+                    <img id="editProfilePicPreview" src="${userPic || 'https://placehold.co/100x100'}" alt="Profile"
+                        style="width:90px;height:90px;border-radius:50%;box-shadow:0 2px 12px #3498db33;border:3px solid #fff;">
+                </div>
+            </div>
+        </div>
+        <form id="editProfileForm" style="padding: 28px 24px 18px 24px; background:#fff;">
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600;color:#3498db;display:block;margin-bottom:6px;">Full Name</label>
+                <input type="text" id="editName" value="${userName}"
+                    style="width:100%;padding:10px;border-radius:7px;border:1px solid #ccc;font-size:1em;outline:none;transition:0.3s;">
+            </div>
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600;color:#3498db;display:block;margin-bottom:6px;">Email</label>
+                <input type="email" id="editEmail" value="${userEmail}"
+                    style="width:100%;padding:10px;border-radius:7px;border:1px solid #ccc;font-size:1em;outline:none;transition:0.3s;">
+            </div>
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600;color:#3498db;display:block;margin-bottom:6px;">Phone</label>
+                <input type="tel" id="editPhone" value="${userPhone}"
+                    style="width:100%;padding:10px;border-radius:7px;border:1px solid #ccc;font-size:1em;outline:none;transition:0.3s;">
+            </div>
+            <div style="margin-bottom:22px;">
+                <label style="font-weight:600;color:#3498db;display:block;margin-bottom:6px;">Profile Picture</label>
+                <input type="file" id="editProfilePic" accept="image/*"
+                    style="display:block;margin-top:6px;font-size:0.98em;">
+            </div>
+            <div style="display:flex;gap:12px;">
+                <button type="submit"
+                    style="flex:1;background:linear-gradient(90deg,#3498db 60%,#2980b9 100%);color:#fff;border:none;padding:12px 0;border-radius:10px;cursor:pointer;font-weight:600;font-size:1em;transition:0.3s;">
+                    Save
+                </button>
+                <button type="button" id="cancelEditProfile"
+                    style="flex:1;background:#f5f9fc;color:#3498db;border:1px solid #3498db;padding:12px 0;border-radius:10px;cursor:pointer;font-weight:600;font-size:1em;transition:0.3s;">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    `;
+
+            // Preview selected profile picture
+            document.getElementById('editProfilePic').addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        document.getElementById('editProfilePicPreview').src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Save changes
+            document.getElementById('editProfileForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const newName = document.getElementById('editName').value.trim();
+                const newEmail = document.getElementById('editEmail').value.trim();
+                const newPhone = document.getElementById('editPhone').value.trim();
+                const picInput = document.getElementById('editProfilePic');
+                if (picInput && picInput.files && picInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        localStorage.setItem('roamlyUserPic', event.target.result);
+                        localStorage.setItem('roamlyUser', newName);
+                        localStorage.setItem('roamlyUserEmail', newEmail);
+                        localStorage.setItem('roamlyUserPhone', newPhone);
+                        showProfileDashboard();
+                        showGreeting(newName);
+                    };
+                    reader.readAsDataURL(picInput.files[0]);
+                } else {
+                    localStorage.setItem('roamlyUser', newName);
+                    localStorage.setItem('roamlyUserEmail', newEmail);
+                    localStorage.setItem('roamlyUserPhone', newPhone);
+                    showProfileDashboard();
+                    showGreeting(newName);
+                }
+            });
+
+            // Cancel button
+            document.getElementById('cancelEditProfile').onclick = function () {
+                showProfileDashboard();
+            };
+        }
+
+        // --- CUSTOM POPUP ---
+        function showCustomPopup(message) {
+            // Remove existing popup if present
+            const oldPopup = document.getElementById('customPopup');
+            const oldOverlay = document.getElementById('customPopupOverlay');
+            if (oldPopup) oldPopup.remove();
+            if (oldOverlay) oldOverlay.remove();
+
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.id = 'customPopupOverlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(44,62,80,0.25)';
+            overlay.style.zIndex = '2999';
+            overlay.style.backdropFilter = 'blur(2px)';
+            overlay.style.animation = 'fadeInOverlay 0.4s';
+
+            // Create popup
+            const popup = document.createElement('div');
+            popup.id = 'customPopup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%) scale(0.95)';
+            popup.style.background = 'linear-gradient(135deg, #e0f7fa 0%, #fff 100%)';
+            popup.style.padding = '40px 32px 32px 32px';
+            popup.style.borderRadius = '18px';
+            popup.style.boxShadow = '0 12px 40px rgba(44,62,80,0.18)';
+            popup.style.zIndex = '3000';
+            popup.style.textAlign = 'center';
+            popup.style.fontSize = '1.2em';
+            popup.style.color = '#3498db';
+            popup.style.minWidth = '320px';
+            popup.style.maxWidth = '90vw';
+            popup.style.animation = 'popupBounceIn 0.6s cubic-bezier(.68,-0.55,.27,1.55)';
+
+            popup.innerHTML = `
+            <div style="font-size:2.5em; margin-bottom:12px; animation: tada 1.2s;">🎉</div>
+            <div style="margin-bottom:18px;font-size:1.3em;font-weight:600;letter-spacing:0.5px;">
+                ${message}
+            </div>
+            <button id="closePopupBtn" style="background:linear-gradient(90deg,#3498db 60%,#2980b9 100%);color:#fff;border:none;padding:10px 32px;border-radius:7px;cursor:pointer;font-weight:600;font-size:1em;box-shadow:0 2px 8px rgba(52,152,219,0.12);transition:background 0.3s,transform 0.2s;">
+                Close
+            </button>
+        `;
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(popup);
+
+            document.getElementById('closePopupBtn').onclick = function () {
+                popup.remove();
+                overlay.remove();
+            };
+        }
+
+        // --- SHOW GREETING ON PAGE LOAD IF LOGGED IN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = localStorage.getItem('roamlyUser');
+            if (user) {
+                showGreeting(user);
+            }
+        });
+    </script>
+</body>
+
+</html>

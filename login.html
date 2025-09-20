@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly | Discover Your Next Adventure</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Base page styles */
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #3498db;
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header button {
+        background-color: white;
+        color: #3498db;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    /* Overlay */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(2px);
+        z-index: 999;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Popup container */
+    .popup {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px 40px;
+        width: 400px;
+        max-width: 90%;
+        position: relative;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #999;
+    }
+
+    /* Tabs */
+    .tab-header {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+
+    .tab-header div {
+        padding: 10px 20px;
+        border-bottom: 2px solid transparent;
+        font-weight: bold;
+        color: #3498db;
+    }
+
+    .tab-header .active {
+        border-bottom: 2px solid #3498db;
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .tab-content input {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .tab-content button.submit-btn {
+        width: 100%;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+
+    .social-login {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .social-login button {
+        flex: 1;
+        margin: 0 5px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-size: 14px;
+    }
+
+    .social-login .google { background-color: #db4437; }
+    .social-login .facebook { background-color: #4267B2; }
+
+    .signup-link {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .signup-link a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Roamly</h1>
+    <button id="loginBtn">Login / Signup</button>
+</header>
+
+<!-- Overlay -->
+<div class="overlay" id="popupOverlay">
+    <div class="popup">
+        <span class="close-btn" id="closePopup">&times;</span>
+
+        <!-- Tabs -->
+        <div class="tab-header">
+            <div id="loginTab" class="active">Login</div>
+            <div id="signupTab">Sign Up</div>
+        </div>
+
+        <!-- Login Content -->
+        <div class="tab-content active" id="loginContent">
+            <input type="text" placeholder="Email or Username">
+            <input type="password" placeholder="Password">
+            <button class="submit-btn">Login</button>
+            <div class="social-login">
+                <button class="google"><i class="fab fa-google"></i> Google</button>
+                <button class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+            </div>
+            <div class="signup-link">
+                Don't have an account? <a href="#" id="switchToSignup">Sign up</a>
+            </div>
+        </div>
+
+        <!-- Signup Content -->
+        <div class="tab-content" id="signupContent">
+            <input type="text" placeholder="Full Name">
+            <input type="text" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Confirm Password">
+            <button class="submit-btn">Sign Up</button>
+            <div class="social-login">
+                <button class="google"><i class="fab fa-google"></i> Google</button>
+                <button class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+            </div>
+            <div class="signup-link">
+                Already have an account? <a href="#" id="switchToLogin">Login</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const loginBtn = document.getElementById('loginBtn');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closePopup = document.getElementById('closePopup');
+
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+    const loginContent = document.getElementById('loginContent');
+    const signupContent = document.getElementById('signupContent');
+
+    const switchToSignup = document.getElementById('switchToSignup');
+    const switchToLogin = document.getElementById('switchToLogin');
+
+    // Open popup
+    loginBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'flex';
+    });
+
+    // Close popup
+    closePopup.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+    });
+
+    // Prevent clicking overlay from closing
+    popupOverlay.addEventListener('click', e => {
+        if (e.target === popupOverlay) {
+            // do nothing
+        }
+    });
+
+    // Tab switch
+    loginTab.addEventListener('click', () => {
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginContent.classList.add('active');
+        signupContent.classList.remove('active');
+    });
+
+    signupTab.addEventListener('click', () => {
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        signupContent.classList.add('active');
+        loginContent.classList.remove('active');
+    });
+
+    switchToSignup.addEventListener('click', (e) => {
+        e.preventDefault();
+        signupTab.click();
+    });
+
+    switchToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginTab.click();
+    });
+</script>
+
+</body>
+</html>

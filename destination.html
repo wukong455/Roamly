@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="Roamly.png" />
+  <title>Bali Tropical Escape | Roamly</title>
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2ecc71;
+      --dark-color: #2c3e50;
+      --light-color: #ecf0f1;
+      --accent-color: #e74c3c;
+      --text-color: #333;
+      --text-light: #7f8c8d;
+      --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: white;
+      box-shadow: var(--box-shadow);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .logo span {
+      color: var(--secondary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO SECTION ================= */
+    .hero {
+      width: 100%;
+      height: 80vh;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('post.jpeg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding-top: 80px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 2rem;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ================= SEARCH BAR ================= */
+    .search-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 15px 25px;
+      font-size: 18px;
+      border: 2px solid #e1e5eb;
+      border-radius: 50px;
+      outline: none;
+      transition: all 0.3s;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-bar:focus {
+      border-color: #4dabf7;
+      box-shadow: 0 2px 15px rgba(77, 171, 247, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #adb5bd;
+      font-size: 1.2rem;
+    }
+
+    /* ================= DESTINATIONS ================= */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .destination-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .destination-card:hover .card-image img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .destination-name {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .destination-location {
+      display: flex;
+      align-items: center;
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .location-icon {
+      margin-right: 5px;
+    }
+
+    .destination-description {
+      font-size: 0.95rem;
+      color: #495057;
+      margin-bottom: 15px;
+    }
+
+    .price-tag {
+      font-weight: bold;
+      color: #2b8a3e;
+    }
+
+    .load-more-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .view-more-btn {
+      padding: 12px 30px;
+      background-color: #4dabf7;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .view-more-btn:hover {
+      background-color: #339af0;
+      transform: translateY(-2px);
+    }
+
+    /* ================= NO RESULTS ================= */
+    .no-results {
+      text-align: center;
+      grid-column: 1/-1;
+      padding: 50px;
+      color: #868e96;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* Book Now Section */
+    .book-now-section {
+      background: linear-gradient(90deg, var(--primary-color) 60%, var(--secondary-color) 100%);
+      color: white;
+      padding: 60px 0 40px 0;
+      margin-top: 60px;
+    }
+
+    .book-now-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .book-now-text {
+      flex: 1 1 300px;
+    }
+
+    .book-now-text h2 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .book-now-text p {
+      font-size: 1.1rem;
+      color: #eaf6fb;
+    }
+
+    .book-now-form {
+      flex: 1 1 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+    }
+
+    .book-now-form input,
+    .book-now-form select {
+      padding: 13px 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      margin-bottom: 0;
+    }
+
+    .book-now-form input:focus,
+    .book-now-form select:focus {
+      box-shadow: 0 0 0 2px var(--accent-color);
+    }
+
+    .book-now-btn {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 5px;
+    }
+
+    .book-now-btn:hover {
+      background: #c0392b;
+    }
+
+    @media (max-width: 900px) {
+      .book-now-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .book-now-form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 60px 0 0;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: #bdc3c7;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.1);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .social-links a:hover {
+      background-color: var(--primary-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bdc3c7;
+      font-size: 14px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: white;
+        flex-direction: column;
+        padding: 80px 30px;
+        box-shadow: var(--box-shadow);
+        transition: right 0.3s;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        margin: 15px 0;
+      }
+
+      .destination-hero {
+        height: 50vh;
+        margin-top: 70px;
+      }
+
+      .hero-content h1 {
+        font-size: 36px;
+      }
+
+      .overview-content {
+        grid-template-columns: 1fr;
+      }
+
+      .secondary-image {
+        width: 200px;
+        height: 150px;
+        bottom: -20px;
+        right: -20px;
+      }
+
+      .itinerary-tabs {
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        padding: 10px 15px;
+        font-size: 16px;
+      }
+
+      .itinerary-content {
+        padding: 20px;
+      }
+
+      .pricing-plans {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .cta-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">R<span>oamly</span></div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="destination.html">Destinations</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="contactus.html">Contact</a></li>
+        </ul>
+        <div class="mobile-menu-btn" id="menuBtn">☰</div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Explore Our Top Destinations</h1>
+      <p>Handpicked places just for your next adventure</p>
+    </div>
+  </section>
+
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="Search destinations by name, location or keywords..."
+      id="searchInput">
+    <div class="search-icon">🔍</div>
+  </div>
+
+  <div class="destinations-grid" id="destinationsContainer">
+    <!-- Destination cards will be populated here -->
+    <div class="destination-card" data-name="Paris" data-location="France" data-tags="romantic city europe">
+      <div class="card-image">
+        <img
+          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/999e44e5-7679-432d-ba50-fb76a697cbb9.png"
+          alt="Eiffel Tower at sunset with Paris cityscape and Seine river" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Paris</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>France</span>
+        </div>
+        <p class="destination-description">The City of Light known for its romantic atmosphere, world-class museums, and
+          iconic landmarks like the Eiffel Tower and Louvre.</p>
+        <div class="price-tag">From $899</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Kyoto" data-location="Japan" data-tags="cultural heritage asia">
+      <div class="card-image">
+        <img
+          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3b5c6d9e-2a0c-4b1c-bb3d-5f8d6e7c9f3a.png"
+          alt="Traditional Japanese temple in Kyoto with cherry blossoms" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Kyoto</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>Japan</span>
+        </div>
+        <p class="destination-description">A city rich in cultural heritage, known for its stunning temples, traditional
+          tea houses, and beautiful gardens.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+
+    <!-- New destination cards below -->
+    <div class="destination-card" data-name="Bali" data-location="Indonesia" data-tags="beach tropical asia nature">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Bali tropical beach" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Bali</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>Indonesia</span>
+        </div>
+        <p class="destination-description">A tropical paradise famous for its beaches, lush rice terraces, and vibrant
+          culture.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="New York" data-location="USA" data-tags="city urban america skyline">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80"
+          alt="New York City skyline" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">New York</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>USA</span>
+        </div>
+        <p class="destination-description">The city that never sleeps, offering iconic sights like Times Square, Central
+          Park, and Broadway.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Cape Town" data-location="South Africa"
+      data-tags="adventure africa mountain beach">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80"
+          alt="Cape Town Table Mountain" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Cape Town</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>South Africa</span>
+        </div>
+        <p class="destination-description">A stunning city with Table Mountain, beautiful beaches, and a vibrant food
+          scene.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Santorini" data-location="Greece"
+      data-tags="island europe romantic sunset">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+          alt="Santorini white houses and blue domes" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Santorini</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>Greece</span>
+        </div>
+        <p class="destination-description">Famous for its whitewashed houses, blue domes, and breathtaking sunsets over
+          the Aegean Sea.</p>
+        <div class="price-tag">From $1399</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Queenstown" data-location="New Zealand"
+      data-tags="adventure nature mountains">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"
+          alt="Queenstown mountains and lake" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Queenstown</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>New Zealand</span>
+        </div>
+        <p class="destination-description">The adventure capital of the world, surrounded by stunning mountains and
+          lakes.</p>
+        <div class="price-tag">From $1499</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Rome" data-location="Italy" data-tags="history europe city culture">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+          alt="Rome Colosseum" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Rome</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>Italy</span>
+        </div>
+        <p class="destination-description">A city steeped in history, home to the Colosseum, Roman Forum, and delicious
+          Italian cuisine.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Machu Picchu" data-location="Peru"
+      data-tags="adventure history south america">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80"
+          alt="Machu Picchu ruins" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Machu Picchu</h3>
+        <div class="destination-location">
+          <span class="location-icon">📍</span>
+          <span>Peru</span>
+        </div>
+        <p class="destination-description">The legendary Incan citadel set high in the Andes Mountains, a bucket-list
+          adventure.</p>
+        <div class="price-tag">From $1599</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="Sydney" data-location="Australia" data-tags="city beach opera house">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80"
+          alt="Sydney Opera House" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Sydney</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Australia</span></div>
+        <p class="destination-description">Home to the iconic Opera House and Harbour Bridge, with beautiful beaches and
+          vibrant city life.</p>
+        <div class="price-tag">From $1399</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Dubai" data-location="UAE" data-tags="luxury desert skyscraper">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Dubai skyline" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Dubai</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>UAE</span></div>
+        <p class="destination-description">A city of luxury shopping, ultramodern architecture, and lively nightlife
+          scene.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Barcelona" data-location="Spain" data-tags="beach europe architecture">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=600&q=80"
+          alt="Barcelona cityscape" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Barcelona</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Spain</span></div>
+        <p class="destination-description">Known for its art and architecture, vibrant street life, and Mediterranean
+          beaches.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Istanbul" data-location="Turkey" data-tags="history culture asia europe">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=600&q=80"
+          alt="Istanbul skyline" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Istanbul</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Turkey</span></div>
+        <p class="destination-description">A city straddling Europe and Asia, famous for its historic sites and vibrant
+          bazaars.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Prague" data-location="Czech Republic" data-tags="europe history castle">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80"
+          alt="Prague castle" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Prague</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Czech Republic</span></div>
+        <p class="destination-description">Known for its Old Town Square, colorful baroque buildings, and medieval
+          Astronomical Clock.</p>
+        <div class="price-tag">From $899</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Banff" data-location="Canada" data-tags="nature mountains lakes">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Banff National Park" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Banff</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Canada</span></div>
+        <p class="destination-description">A haven for nature lovers, with turquoise lakes, snow-capped peaks, and
+          wildlife.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Petra" data-location="Jordan" data-tags="history desert wonder">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80"
+          alt="Petra Jordan" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Petra</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Jordan</span></div>
+        <p class="destination-description">The ancient rose-red city, famous for its rock-cut architecture and
+          archaeological wonders.</p>
+        <div class="price-tag">From $1399</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Reykjavik" data-location="Iceland" data-tags="nature northern lights">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+          alt="Reykjavik Iceland" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Reykjavik</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Iceland</span></div>
+        <p class="destination-description">Gateway to Iceland’s natural wonders, geysers, hot springs, and the Northern
+          Lights.</p>
+        <div class="price-tag">From $1599</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Venice" data-location="Italy" data-tags="romantic canals europe">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+          alt="Venice canals" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Venice</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Italy</span></div>
+        <p class="destination-description">The city of canals, gondolas, and Renaissance art, perfect for a romantic
+          escape.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Phuket" data-location="Thailand" data-tags="beach asia tropical">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Phuket beach" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Phuket</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Thailand</span></div>
+        <p class="destination-description">Thailand’s largest island, known for its beautiful beaches, nightlife, and
+          water sports.</p>
+        <div class="price-tag">From $899</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Marrakech" data-location="Morocco" data-tags="africa culture market">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80"
+          alt="Marrakech market" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Marrakech</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Morocco</span></div>
+        <p class="destination-description">A city of vibrant souks, palaces, and gardens at the foot of the Atlas
+          Mountains.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Cusco" data-location="Peru" data-tags="history andes culture">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80"
+          alt="Cusco Peru" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Cusco</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Peru</span></div>
+        <p class="destination-description">The historic capital of the Inca Empire, gateway to Machu Picchu and the
+          Sacred Valley.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Budapest" data-location="Hungary" data-tags="europe city river">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=600&q=80"
+          alt="Budapest city" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Budapest</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Hungary</span></div>
+        <p class="destination-description">A city split by the Danube, famous for its architecture, thermal baths, and
+          vibrant nightlife.</p>
+        <div class="price-tag">From $899</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Hanoi" data-location="Vietnam" data-tags="asia culture food">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Hanoi Vietnam" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Hanoi</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Vietnam</span></div>
+        <p class="destination-description">Vietnam’s capital, known for its centuries-old architecture and rich
+          Southeast Asian culture.</p>
+        <div class="price-tag">From $799</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Athens" data-location="Greece" data-tags="history europe acropolis">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+          alt="Athens Acropolis" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Athens</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Greece</span></div>
+        <p class="destination-description">The cradle of Western civilization, home to the Acropolis and ancient ruins.
+        </p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Seoul" data-location="South Korea" data-tags="asia city modern">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80"
+          alt="Seoul city" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Seoul</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>South Korea</span></div>
+        <p class="destination-description">A dynamic city blending modern skyscrapers, pop culture, palaces, and street
+          markets.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+
+    <div class="destination-card" data-name="London" data-location="United Kingdom" data-tags="city europe history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80"
+          alt="London Big Ben" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">London</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>United Kingdom</span></div>
+        <p class="destination-description">A global city with iconic landmarks like Big Ben, Buckingham Palace, and the
+          London Eye.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Rio de Janeiro" data-location="Brazil"
+      data-tags="beach carnival south america">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+          alt="Rio de Janeiro" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Rio de Janeiro</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Brazil</span></div>
+        <p class="destination-description">Famous for its Copacabana beach, Christ the Redeemer, and vibrant Carnival
+          festival.</p>
+        <div class="price-tag">From $1399</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Singapore" data-location="Singapore" data-tags="asia city modern">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+          alt="Singapore Marina Bay" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Singapore</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Singapore</span></div>
+        <p class="destination-description">A futuristic city-state with lush gardens, Marina Bay Sands, and diverse
+          cuisine.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Los Angeles" data-location="USA" data-tags="city hollywood america">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Los Angeles" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Los Angeles</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>USA</span></div>
+        <p class="destination-description">The entertainment capital, home to Hollywood, beaches, and vibrant nightlife.
+        </p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Hong Kong" data-location="China" data-tags="asia city skyline">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+          alt="Hong Kong skyline" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Hong Kong</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>China</span></div>
+        <p class="destination-description">A dazzling city with a stunning skyline, bustling markets, and Victoria Peak
+          views.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Amsterdam" data-location="Netherlands" data-tags="europe canals tulips">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=600&q=80"
+          alt="Amsterdam canals" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Amsterdam</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Netherlands</span></div>
+        <p class="destination-description">Known for its artistic heritage, canal system, and colorful tulip fields.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Cairo" data-location="Egypt" data-tags="africa pyramids history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80"
+          alt="Cairo Pyramids" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Cairo</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Egypt</span></div>
+        <p class="destination-description">Home to the Great Pyramids of Giza, ancient temples, and the Nile River.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Toronto" data-location="Canada" data-tags="city urban canada">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80"
+          alt="Toronto skyline" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Toronto</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Canada</span></div>
+        <p class="destination-description">A multicultural metropolis with the CN Tower, waterfront, and vibrant
+          neighborhoods.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Zurich" data-location="Switzerland" data-tags="europe lakes mountains">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="Zurich Switzerland" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Zurich</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Switzerland</span></div>
+        <p class="destination-description">A picturesque city on Lake Zurich, surrounded by the Swiss Alps and medieval
+          old town.</p>
+        <div class="price-tag">From $1499</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Edinburgh" data-location="Scotland" data-tags="europe castle history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80"
+          alt="Edinburgh Castle" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Edinburgh</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Scotland</span></div>
+        <p class="destination-description">Famous for its historic castle, Royal Mile, and annual arts festivals.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="San Francisco" data-location="USA" data-tags="city bridge america">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+          alt="San Francisco Golden Gate" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">San Francisco</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>USA</span></div>
+        <p class="destination-description">Known for the Golden Gate Bridge, cable cars, and vibrant neighborhoods.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Beijing" data-location="China" data-tags="asia history great wall">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+          alt="Beijing Great Wall" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Beijing</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>China</span></div>
+        <p class="destination-description">China’s capital, home to the Forbidden City, Great Wall, and ancient temples.
+        </p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Florence" data-location="Italy" data-tags="europe art renaissance">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=600&q=80"
+          alt="Florence Italy" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Florence</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Italy</span></div>
+        <p class="destination-description">The birthplace of the Renaissance, with world-class art, architecture, and
+          cuisine.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Lisbon" data-location="Portugal" data-tags="europe city coast">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80"
+          alt="Lisbon Portugal" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Lisbon</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Portugal</span></div>
+        <p class="destination-description">A coastal city with colorful streets, historic trams, and stunning
+          viewpoints.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Buenos Aires" data-location="Argentina"
+      data-tags="south america tango city">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+          alt="Buenos Aires" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Buenos Aires</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Argentina</span></div>
+        <p class="destination-description">The Paris of South America, famous for tango, steak, and vibrant
+          neighborhoods.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Dubrovnik" data-location="Croatia" data-tags="europe coast medieval">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80"
+          alt="Dubrovnik Croatia" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Dubrovnik</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Croatia</span></div>
+        <p class="destination-description">A walled city on the Adriatic, known for its medieval architecture and sea
+          views.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Havana" data-location="Cuba" data-tags="caribbean culture history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+          alt="Havana Cuba" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Havana</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Cuba</span></div>
+        <p class="destination-description">A city of classic cars, colonial architecture, and lively music on the
+          Caribbean.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Moscow" data-location="Russia" data-tags="europe city kremlin">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+          alt="Moscow Russia" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Moscow</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Russia</span></div>
+        <p class="destination-description">Russia’s capital, home to the Kremlin, Red Square, and colorful St. Basil’s
+          Cathedral.</p>
+        <div class="price-tag">From $1299</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Auckland" data-location="New Zealand" data-tags="oceania city harbor">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"
+          alt="Auckland New Zealand" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Auckland</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>New Zealand</span></div>
+        <p class="destination-description">A vibrant city built on volcanic hills, surrounded by harbors and islands.
+        </p>
+        <div class="price-tag">From $1399</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Cape Coast" data-location="Ghana" data-tags="africa coast history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80"
+          alt="Cape Coast Ghana" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Cape Coast</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Ghana</span></div>
+        <p class="destination-description">Known for its historic forts, beautiful beaches, and vibrant culture.</p>
+        <div class="price-tag">From $1099</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Antalya" data-location="Turkey" data-tags="mediterranean beach history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=600&q=80"
+          alt="Antalya Turkey" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Antalya</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Turkey</span></div>
+        <p class="destination-description">A resort city on the Mediterranean, famous for turquoise beaches and ancient
+          ruins.</p>
+        <div class="price-tag">From $999</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Siem Reap" data-location="Cambodia" data-tags="asia temples history">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80"
+          alt="Siem Reap Cambodia" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Siem Reap</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Cambodia</span></div>
+        <p class="destination-description">Gateway to the ancient temples of Angkor Wat and vibrant local markets.</p>
+        <div class="price-tag">From $899</div>
+      </div>
+    </div>
+    <div class="destination-card" data-name="Santiago" data-location="Chile" data-tags="south america city andes">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+          alt="Santiago Chile" />
+      </div>
+      <div class="card-content">
+        <h3 class="destination-name">Santiago</h3>
+        <div class="destination-location"><span class="location-icon">📍</span><span>Chile</span></div>
+        <p class="destination-description">A cosmopolitan city set against the backdrop of the Andes mountains.</p>
+        <div class="price-tag">From $1199</div>
+      </div>
+    </div>
+    <!-- Additional destination cards go here -->
+  </div>
+
+  <div class="load-more-container">
+    <button id="viewMoreBtn" class="view-more-btn">View All Destinations</button>
+  </div>
+
+  <section class="book-now-section">
+    <div class="container book-now-content">
+      <div class="book-now-text">
+        <h2>Ready to Book Your Dream Trip?</h2>
+        <p>Secure your spot at one of our top destinations. Our travel experts are here to help you every step of the
+          way!</p>
+      </div>
+      <div id="bookNowFormContainer">
+        <form class="book-now-form">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <select required>
+            <option value="">Select Destination</option>
+            <option>Paris</option>
+            <option>Kyoto</option>
+            <option>Bali</option>
+            <option>New York</option>
+            <option>Cape Town</option>
+            <option>Santorini</option>
+            <option>Queenstown</option>
+            <option>Rome</option>
+            <option>Machu Picchu</option>
+            <option>Sydney</option>
+            <option>Dubai</option>
+            <option>Barcelona</option>
+            <option>Istanbul</option>
+            <option>Prague</option>
+            <option>Banff</option>
+            <option>Petra</option>
+            <option>Reykjavik</option>
+            <option>Venice</option>
+            <option>Phuket</option>
+            <option>Marrakech</option>
+            <option>Cusco</option>
+            <option>Budapest</option>
+            <option>Hanoi</option>
+            <option>Athens</option>
+            <option>Seoul</option>
+            <option>London</option>
+            <option>Rio de Janeiro</option>
+            <option>Singapore</option>
+            <option>Los Angeles</option>
+            <option>Hong Kong</option>
+            <option>Amsterdam</option>
+            <option>Cairo</option>
+            <option>Toronto</option>
+            <option>Zurich</option>
+            <option>Edinburgh</option>
+            <option>San Francisco</option>
+            <option>Beijing</option>
+            <option>Florence</option>
+            <option>Lisbon</option>
+            <option>Buenos Aires</option>
+            <option>Dubrovnik</option>
+            <option>Havana</option>
+            <option>Moscow</option>
+            <option>Auckland</option>
+            <option>Cape Coast</option>
+            <option>Antalya</option>
+            <option>Siem Reap</option>
+            <option>Santiago</option>
+          </select>
+          <button type="submit" class="book-now-btn">Book Now</button>
+        </form>
+      </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Roamly</h3>
+          <p>Making travel dreams come true since 2015. We specialize in curated travel experiences tailored to your
+            preferences.</p>
+          <div class="social-links">
+            <a href="#">FB</a>
+            <a href="#">IG</a>
+            <a href="#">TW</a>
+            <a href="#">YT</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Travel Advisory</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>105/591, New Haleem Market, Chamanganj, Kanpur</li>
+            <li>Phone: +91 9336189929</li>
+            <li>Email: info@roamly.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Roamly Travel. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Navbar Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Initially hide all cards beyond the first 6
+    const allCards = document.querySelectorAll('.destination-card');
+    allCards.forEach((card, index) => {
+      if (index >= 6) {
+        card.style.display = 'none';
+      }
+    });
+
+    // View More functionality
+    document.getElementById('viewMoreBtn').addEventListener('click', function () {
+      const hiddenCards = document.querySelectorAll('.destination-card[style="display: none;"]');
+      hiddenCards.forEach(card => {
+        card.style.display = 'block';
+      });
+      this.style.display = 'none';
+    });
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function (e) {
+      // When searching, show all cards to ensure search results aren't limited
+      allCards.forEach(card => {
+        card.style.display = 'block';
+      });
+      const searchTerm = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.destination-card');
+      let hasResults = false;
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const location = card.getAttribute('data-location').toLowerCase();
+        const tags = card.getAttribute('data-tags').toLowerCase();
+
+        if (name.includes(searchTerm) ||
+          location.includes(searchTerm) ||
+          tags.includes(searchTerm)) {
+          card.style.display = 'block';
+          hasResults = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show no results message if no cards match
+      const noResults = document.getElementById('noResults');
+      if (!hasResults && searchTerm.length > 0) {
+        if (!noResults) {
+          const container = document.getElementById('destinationsContainer');
+          const message = document.createElement('div');
+          message.className = 'no-results';
+          message.id = 'noResults';
+          message.textContent = `No destinations found for "${searchTerm}"`;
+          container.appendChild(message);
+        }
+      } else if (noResults) {
+        noResults.remove();
+      }
+    });
+
+    // Place this above your first event listener for clarity
+    function handleBookNowSubmit(e) {
+      e.preventDefault();
+      const container = document.getElementById('bookNowFormContainer');
+      container.innerHTML = `
+    <div style="
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+      padding: 40px 30px 30px 30px;
+      text-align: center;
+      position: relative;
+      animation: popIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    ">
+      <div style="
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 18px auto;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2ecc71 60%, #3498db 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(46,204,113,0.15);
+        animation: bounce 1s;
+      ">
+        <span style="display:inline-block;">&#10004;</span>
+      </div>
+      <h2 style="color:#2ecc71; margin-bottom:12px;">Booking Confirmed!</h2>
+      <p style="color:#333; font-size:1.08rem; margin-bottom:18px;">
+        🎉 Thank you for booking with Roamly!<br>
+        Our travel experts will reach out to you soon.<br>
+        <span style="color:#3498db;">Safe travels ahead!</span>
+      </p>
+      <button id="bookAgainBtn" style="
+        background: #e74c3c;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.2s;
+      ">Book Another Trip</button>
+    </div>
+    <style>
+      @keyframes popIn {
+        0% { transform: scale(0.7); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      @keyframes bounce {
+        0% { transform: scale(0.7);}
+        60% { transform: scale(1.15);}
+        100% { transform: scale(1);}
+      }
+    </style>
+  `;
+
+      // Add event listener for "Book Another Trip"
+      document.getElementById('bookAgainBtn').onclick = function () {
+        container.innerHTML = `
+      <form class="book-now-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <select required>
+          <option value="">Select Destination</option>
+          <option>Paris</option>
+          <option>Kyoto</option>
+          <option>Bali</option>
+          <option>New York</option>
+          <option>Cape Town</option>
+          <option>Santorini</option>
+          <option>Queenstown</option>
+          <option>Rome</option>
+          <option>Machu Picchu</option>
+          <option>Sydney</option>
+          <option>Dubai</option>
+          <option>Barcelona</option>
+          <option>Istanbul</option>
+          <option>Prague</option>
+          <option>Banff</option>
+          <option>Petra</option>
+          <option>Reykjavik</option>
+          <option>Venice</option>
+          <option>Phuket</option>
+          <option>Marrakech</option>
+          <option>Cusco</option>
+          <option>Budapest</option>
+          <option>Hanoi</option>
+          <option>Athens</option>
+          <option>Seoul</option>
+          <option>London</option>
+          <option>Rio de Janeiro</option>
+          <option>Singapore</option>
+          <option>Los Angeles</option>
+          <option>Hong Kong</option>
+          <option>Amsterdam</option>
+          <option>Cairo</option>
+          <option>Toronto</option>
+          <option>Zurich</option>
+          <option>Edinburgh</option>
+          <option>San Francisco</option>
+          <option>Beijing</option>
+          <option>Florence</option>
+          <option>Lisbon</option>
+          <option>Buenos Aires</option>
+          <option>Dubrovnik</option>
+          <option>Havana</option>
+          <option>Moscow</option>
+          <option>Auckland</option>
+          <option>Cape Coast</option>
+          <option>Antalya</option>
+          <option>Siem Reap</option>
+          <option>Santiago</option>
+        </select>
+        <button type="submit" class="book-now-btn">Book Now</button>
+      </form>
+    `;
+        // Re-attach the submit event handler to the new form
+        document.querySelector('.book-now-form')?.addEventListener('submit', handleBookNowSubmit);
+      };
+    }
+
+    // Attach the handler to the initial form
+    document.querySelector('.book-now-form')?.addEventListener('submit', handleBookNowSubmit);
+    // Scroll to or highlight the searched destination if present in URL
+    window.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const dest = params.get('destination');
+      if (dest) {
+        // Find the card with matching data-name (case-insensitive)
+        const cards = document.querySelectorAll('.destination-card');
+        let found = false;
+        cards.forEach(card => {
+          if (card.getAttribute('data-name').toLowerCase() === dest.toLowerCase()) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.style.boxShadow = '0 0 0 4px #3498db, 0 5px 15px rgba(0,0,0,0.1)';
+            card.style.transition = 'box-shadow 0.5s';
+            found = true;
+          }
+        });
+        if (!found) {
+          alert(`No destination found for "${dest}"`);
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

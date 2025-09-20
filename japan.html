@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Roamly.png" />
+    <title>Japanese Cultural Journey | Roamly</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --accent-color: #2ecc71;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Destination Hero */
+        .destination-hero {
+            height: 80vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('journey.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .hero-breadcrumb a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero-breadcrumb span {
+            margin: 0 10px;
+            color: #ddd;
+        }
+
+        /* Destination Overview */
+        .destination-overview {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .overview-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .overview-text h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .highlight-list {
+            margin-top: 30px;
+        }
+
+        .highlight-list li {
+            margin-bottom: 15px;
+            list-style: none;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .highlight-list li::before {
+            content: '✓';
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .overview-image {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .secondary-image {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            border: 5px solid white;
+        }
+
+        /* Itinerary Section */
+        .itinerary {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .itinerary-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -1px;
+            left: 0;
+        }
+
+        .itinerary-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .itinerary-day {
+            margin-bottom: 40px;
+        }
+
+        .itinerary-day h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .day-activities li {
+            margin-bottom: 15px;
+            list-style-position: inside;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Accommodations */
+        .accommodations {
+            padding: 80px 0;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .hotel-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hotel-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.1);
+        }
+
+        .hotel-info {
+            padding: 20px;
+        }
+
+        .hotel-info h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .hotel-rating {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .hotel-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hotel-price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Pricing */
+        .pricing {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-label {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pricing-tier {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .pricing-details ul {
+            margin-bottom: 30px;
+        }
+
+        .pricing-details li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .book-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 16px;
+        }
+
+        .accordion-item {
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .accordion-item.active {
+            border-color: var(--primary-color);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: linear-gradient(180deg, #ffffff, #fafafa);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark-color);
+            border: 0;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .accordion-trigger:focus-visible {
+            outline: 3px solid rgba(52, 152, 219, .4);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+
+        .accordion-trigger .chev {
+            transition: transform .3s ease;
+            opacity: .8;
+        }
+
+        .accordion-item.active .chev {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s ease;
+            padding: 0 20px;
+            background: #fff;
+        }
+
+        .accordion-item.active .accordion-content {
+            padding: 0 20px 18px;
+        }
+
+        .accordion-content p {
+            margin-top: 16px;
+            color: var(--text-light);
+            line-height: 1.75;
+        }
+
+        /* Small accent strip on active item */
+        .accordion-item.active {
+            box-shadow: 0 6px 24px rgba(52, 152, 219, 0.15);
+            position: relative;
+        }
+
+        .accordion-item.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .primary-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .primary-btn:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px;
+                box-shadow: var(--box-shadow);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .destination-hero {
+                height: 50vh;
+                margin-top: 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .overview-content {
+                grid-template-columns: 1fr;
+            }
+
+            .secondary-image {
+                width: 200px;
+                height: 150px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .itinerary-tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+
+            .itinerary-content {
+                padding: 20px;
+            }
+
+            .pricing-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">R<span>oamly</span></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="destination.html">Destinations</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn" id="menuBtn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Destination Hero Section -->
+    <section class="destination-hero">
+        <div class="hero-content">
+            <h1>Japanese Cultural Journey</h1>
+            <p>10 Days | 9 Nights | Guided Tour</p>
+        </div>
+    </section>
+
+    <!-- Destination Overview -->
+    <section class="destination-overview">
+        <div class="container">
+            <div class="overview-content">
+                <div class="overview-text">
+                    <h2>Discover the Essence of Japan</h2>
+                    <p>Immerse yourself in Japan's rich cultural heritage with our carefully curated journey through
+                        historic temples, traditional arts, and modern wonders. From the ancient capital of Kyoto to the
+                        neon-lit streets of Tokyo, this tour offers an authentic exploration of Japan's timeless beauty.
+                    </p>
+                    <p>Experience tea ceremonies with masters, stay in ryokan inns, witness geisha performances, and
+                        learn age-old crafts - all while traveling comfortably between destinations on Japan's famed
+                        bullet trains.</p>
+
+                    <div class="highlight-list">
+                        <h4>Tour Highlights:</h4>
+                        <ul>
+                            <li>Private tea ceremony with a tea master in Kyoto</li>
+                            <li>Traditional kaiseki dining experience</li>
+                            <li>Stay in authentic ryokan with onsen hot springs</li>
+                            <li>Cultural workshops (calligraphy, origami, kimono dressing)</li>
+                            <li>Visits to UNESCO World Heritage Sites</li>
+                            <li>Shinkansen (bullet train) travel between cities</li>
+                            <li>Evening with maiko (apprentice geisha) performance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="overview-image">
+                    <img src="pool.jpg"
+                        alt="Golden Pavilion temple in Kyoto with autumn foliage reflecting in the pond"
+                        class="main-image">
+                    <img src="dance.webp"
+                        alt="Traditional Japanese streetscape in Kyoto with wooden machiya houses and cherry blossoms"
+                        class="secondary-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section class="itinerary">
+        <div class="container">
+            <div class="section-title">
+                <h2>Detailed Itinerary</h2>
+                <p>Your journey through Japanese culture</p>
+            </div>
+
+            <div class="itinerary-tabs">
+                <button class="tab-button active" data-day="day1">Day 1-2</button>
+                <button class="tab-button" data-day="day2">Day 3-4</button>
+                <button class="tab-button" data-day="day3">Day 5-6</button>
+                <button class="tab-button" data-day="day4">Day 7-8</button>
+                <button class="tab-button" data-day="day5">Day 9-10</button>
+            </div>
+
+            <div class="itinerary-content">
+                <div class="itinerary-day" id="day1">
+                    <h3>Day 1-2: Arrival in Tokyo & Cultural Introduction</h3>
+                    <ul class="day-activities">
+                        <li>Arrival at Narita/Haneda Airport with private transfer</li>
+                        <li>Orientation walking tour of Asakusa district</li>
+                        <li>Visit Senso-ji Temple (Tokyo's oldest)</li>
+                        <li>Traditional wagashi (Japanese sweets) making workshop</li>
+                        <li>Evening izakaya (Japanese pub) dining experience</li>
+                        <li>Morning sumo stable visit (watching practice session)</li>
+                        <li>Afternoon tea ceremony workshop</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day2" style="display:none">
+                    <h3>Day 3-4: Hakone & Mt. Fuji</h3>
+                    <ul class="day-activities">
+                        <li>Shinkansen ride to Odawara Station</li>
+                        <li>Cable car ride to Owakudani volcanic valley</li>
+                        <li>Cruise on Lake Ashi with views of Mt. Fuji</li>
+                        <li>Check-in to traditional ryokan with private onsen</li>
+                        <li>Kaiseki dinner with seasonal ingredients</li>
+                        <li>Morning visit to Hakone Open-Air Museum</li>
+                        <li>Traditional washi paper making workshop</li>
+                        <li>Evening return to Tokyo</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day3" style="display:none">
+                    <h3>Day 5-6: Cultural Kyoto</h3>
+                    <ul class="day-activities">
+                        <li>Morning Shinkansen to Kyoto</li>
+                        <li>Visit Fushimi Inari's famous torii gate tunnels</li>
+                        <li>Private tea ceremony with master</li>
+                        <li>Explore Gion district (geisha area)</li>
+                        <li>Kimono dressing and photoshoot experience</li>
+                        <li>Morning Zen meditation session</li>
+                        <li>Visit Kinkaku-ji (Golden Pavilion) and Ryoan-ji rock garden</li>
+                        <li>Evening maiko (apprentice geisha) performance</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day4" style="display:none">
+                    <h3>Day 7-8: Nara & Osaka</h3>
+                    <ul class="day-activities">
+                        <li>Day trip to Nara - visit Todai-ji Temple with giant Buddha</li>
+                        <li>Walk through Nara Park with sacred deer</li>
+                        <li>Traditional calligraphy workshop</li>
+                        <li>Evening in Osaka's Dotonbori district</li>
+                        <li>Osaka Castle visit</li>
+                        <li>Kuromon Ichiba market food tour</li>
+                        <li>Origami workshop with master</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day5" style="display:none">
+                    <h3>Day 9-10: Return to Tokyo & Departure</h3>
+                    <ul class="day-activities">
+                        <li>Final morning in Kyoto (free time)</li>
+                        <li>Shinkansen return to Tokyo</li>
+                        <li>Visit Meiji Shrine and Harajuku district</li>
+                        <li>Farewell dinner with sake tasting</li>
+                        <li>Morning visit to Tsukiji Outer Market</li>
+                        <li>Private transfer to airport</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodations Section -->
+    <section class="accommodations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Accommodations</h2>
+                <p>Experience authentic Japanese hospitality</p>
+            </div>
+
+            <div class="hotel-grid">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="ryokansakura.jpg"
+                            alt="Elegant modern ryokan with tatami rooms and garden view in Kyoto">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>Kyoto Ryokan Sakura</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Traditional ryokan with tatami rooms, private onsen baths, and
+                            garden views. Experience authentic Japanese hospitality.</p>
+                        <div class="hotel-price">From ¥45,000/night</div>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="hokanegoraunsen.jpeg"
+                            alt="Luxurious Hakone ryokan with wooden architecture and mountain views">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>Hakone Gora Onsen</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Mountain retreat with private outdoor onsen baths and
+                            Michelin-starred kaiseki dining. Views of Mount Fuji on clear days.</p>
+                        <div class="hotel-price">From ¥50,000/night</div>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="tokyotower.jpg"
+                            alt="Modern Tokyo hotel skyline view with luxurious minimalist design">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>The Tokyo Tower Hotel</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Designer hotel with panoramic city views, rooftop bar, and easy
+                            access to Tokyo's cultural sites.</p>
+                        <div class="hotel-price">From ¥35,000/night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tour Packages</h2>
+                <p>Choose your perfect Japanese experience</p>
+            </div>
+
+            <div class="pricing-plans">
+                <div class="pricing-card">
+                    <h3 class="pricing-tier">Cultural Explorer</h3>
+                    <div class="pricing-amount">$3,299</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>9 nights in 4-star accommodations</li>
+                            <li>Daily breakfast</li>
+                            <li>5 guided cultural experiences</li>
+                            <li>7-day Japan Rail Pass</li>
+                            <li>24/7 bilingual guide support</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-label">Most Popular</div>
+                    <h3 class="pricing-tier">Traditional Japan</h3>
+                    <div class="pricing-amount">$4,799</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>9 nights in 5-star ryokan/hotels</li>
+                            <li>Daily breakfast & 5 gourmet dinners</li>
+                            <li>All cultural experiences included</li>
+                            <li>14-day Japan Rail Pass</li>
+                            <li>Private transfers and guides</li>
+                            <li>$200 spa/onsen credit</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-tier">Luxury Heritage</h3>
+                    <div class="pricing-amount">$6,999</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>9 nights in premium ryokan/suites</li>
+                            <li>All meals with premium beverages</li>
+                            <li>Private cultural experiences</li>
+                            <li>Green Car JR Pass (first class)</li>
+                            <li>Personalized kimono fitting</li>
+                            <li>Unlimited onsen/spa access</li>
+                            <li>Private chauffeur in cities</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Japanese Moments</h2>
+                <p>Discover the beauty that awaits you</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400"
+                        alt="Golden sunset at Fushimi Inari's torii gate pathway in Kyoto">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400"
+                        alt="Cherry blossoms in full bloom along the Philosopher's Path in Kyoto">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400"
+                        alt="Traditional tea ceremony in a Kyoto teahouse with tatami mats">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Neon-lit streets of Tokyo's Shibuya crossing at night">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Snow monkeys bathing in hot springs in Nagano">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Shinkansen bullet train speeding past Mount Fuji">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about this tour</p>
+            </div>
+
+            <div class="accordion" role="tablist">
+                <!-- Item 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq1-btn" aria-expanded="false" aria-controls="faq1">
+                        <span>What's the best season to visit Japan?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq1" role="region" aria-labelledby="faq1-btn"
+                        aria-hidden="true">
+                        <p>Spring (March-May) for cherry blossoms and fall (September-November) for autumn colors are
+                            spectacular. However, Japan offers unique beauty year-round with seasonal festivals and
+                            culinary specialties.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq2-btn" aria-expanded="false" aria-controls="faq2">
+                        <span>Do I need to know Japanese?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq2" role="region" aria-labelledby="faq2-btn"
+                        aria-hidden="true">
+                        <p>Not at all! Our English-speaking guides will assist you throughout. Many signs are in
+                            English, and locals appreciate any effort with simple phrases like "arigatou" (thank you).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq3-btn" aria-expanded="false" aria-controls="faq3">
+                        <span>What about dietary restrictions?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq3" role="region" aria-labelledby="faq3-btn"
+                        aria-hidden="true">
+                        <p>We accommodate all dietary needs with advance notice. While Japanese cuisine features seafood
+                            and specific ingredients, vegetarian, vegan, gluten-free and other requirements can be
+                            accommodated.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq4-btn" aria-expanded="false" aria-controls="faq4">
+                        <span>Is public transportation difficult?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq4" role="region" aria-labelledby="faq4-btn"
+                        aria-hidden="true">
+                        <p>Japan's transit is among the world's best - clean, efficient and punctual. Your JR Pass
+                            provides unlimited bullet train travel, and we provide detailed guidance for subway/bus
+                            systems.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq5-btn" aria-expanded="false" aria-controls="faq5">
+                        <span>What's appropriate temple attire?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq5" role="region" aria-labelledby="faq5-btn"
+                        aria-hidden="true">
+                        <p>Modest clothing covering shoulders and knees is respectful. Many temples provide loaner
+                            wraps. Socks are required when removing shoes (easily removable footwear is recommended).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready for Your Japanese Adventure?</h2>
+            <p>Experience the perfect blend of ancient traditions and modern wonders with our carefully curated cultural
+                journey.</p>
+            <div class="cta-buttons">
+                <a href="booknow kyoto.html" class="cta-btn primary-btn">Book Your Japan Tour</a>
+                <a href="#" class="cta-btn secondary-btn">Request More Information</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Roamly</h3>
+                    <p>Making travel dreams come true since 2015. We specialize in curated travel experiences tailored
+                        to your preferences.</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Travel Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>105/591, New Haleem Market, Chamanganj, Kanpur</li>
+                        <li>Phone: +91 9336189929</li>
+                        <li>Email: info@roamly.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Roamly Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Itinerary tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const itineraryDays = document.querySelectorAll('.itinerary-day');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const dayId = button.getAttribute('data-day');
+
+                // Hide all days
+                itineraryDays.forEach(day => {
+                    day.style.display = 'none';
+                });
+
+                // Show selected day
+                document.getElementById(dayId).style.display = 'block';
+
+                // Update active tab
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // Initialize first day as visible
+        document.getElementById('day1').style.display = 'block';
+
+        // Accordion functionality
+        const accordionItems = document.querySelectorAll('.accordion-item');         
+        accordionItems.forEach(item => {
+            const trigger = item.querySelector('.accordion-trigger');
+            const content = item.querySelector('.accordion-content');
+
+            trigger.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                accordionItems.forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.accordion-content').style.maxHeight = '0';
+                });
+
+                // If not already active, open this item
+                if (!isActive) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+
+        </script>
+</body>
+</html> 

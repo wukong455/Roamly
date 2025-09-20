@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Roamly.png" />
+    <title>Swiss Alps Adventure | Roamly</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Destination Hero */
+        .destination-hero {
+            height: 80vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('top.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .hero-breadcrumb a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero-breadcrumb span {
+            margin: 0 10px;
+            color: #ddd;
+        }
+
+        /* Destination Overview */
+        .destination-overview {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .overview-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .overview-text h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .highlight-list {
+            margin-top: 30px;
+        }
+
+        .highlight-list li {
+            margin-bottom: 15px;
+            list-style: none;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .highlight-list li::before {
+            content: '✓';
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .overview-image {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .secondary-image {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            border: 5px solid white;
+        }
+
+        /* Itinerary Section */
+        .itinerary {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .itinerary-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -1px;
+            left: 0;
+        }
+
+        .itinerary-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .itinerary-day {
+            margin-bottom: 40px;
+        }
+
+        .itinerary-day h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .day-activities li {
+            margin-bottom: 15px;
+            list-style-position: inside;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Accommodations */
+        .accommodations {
+            padding: 80px 0;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .hotel-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hotel-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.1);
+        }
+
+        .hotel-info {
+            padding: 20px;
+        }
+
+        .hotel-info h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .hotel-rating {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .hotel-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .hotel-price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Pricing */
+        .pricing {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-label {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pricing-tier {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .pricing-details ul {
+            margin-bottom: 30px;
+        }
+
+        .pricing-details li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .book-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background-color: #27ae60;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            margin-bottom: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 20px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .accordion-header i {
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .accordion-content.show {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .primary-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .primary-btn:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px;
+                box-shadow: var(--box-shadow);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .destination-hero {
+                height: 50vh;
+                margin-top: 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .overview-content {
+                grid-template-columns: 1fr;
+            }
+
+            .secondary-image {
+                width: 200px;
+                height: 150px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .itinerary-tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+
+            .itinerary-content {
+                padding: 20px;
+            }
+
+            .pricing-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+        }
+
+        /* --- FAQ / Accordion (refined) --- */
+        .faq-section {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 16px;
+        }
+
+        .accordion-item {
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .accordion-item.active {
+            border-color: var(--primary-color);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: linear-gradient(180deg, #ffffff, #fafafa);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark-color);
+            border: 0;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .accordion-trigger:focus-visible {
+            outline: 3px solid rgba(52, 152, 219, .4);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+
+        .accordion-trigger .chev {
+            transition: transform .3s ease;
+            opacity: .8;
+        }
+
+        .accordion-item.active .chev {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s ease;
+            padding: 0 20px;
+            background: #fff;
+        }
+
+        .accordion-item.active .accordion-content {
+            padding: 0 20px 18px;
+        }
+
+        .accordion-content p {
+            margin-top: 16px;
+            color: var(--text-light);
+            line-height: 1.75;
+        }
+
+        /* Small accent strip on active item */
+        .accordion-item.active {
+            box-shadow: 0 6px 24px rgba(52, 152, 219, 0.15);
+            position: relative;
+        }
+
+        .accordion-item.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">R<span>oamly</span></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="destination.html">Destinations</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn" id="menuBtn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Destination Hero Section -->
+    <section class="destination-hero">
+        <div class="hero-content">
+            <div class="hero-breadcrumb">
+
+            </div>
+            <h1>Swiss Alps Adventure</h1>
+            <p>8 Days | 7 Nights | Guided Tour</p>
+        </div>
+    </section>
+
+    <!-- Destination Overview -->
+    <section class="destination-overview">
+        <div class="container">
+            <div class="overview-content">
+                <div class="overview-text">
+                    <h2>Experience the Majesty of the Swiss Alps</h2>
+                    <p>Embark on an unforgettable journey through Switzerland's breathtaking Alpine landscapes. Our
+                        Swiss Alps Adventure takes you through picturesque villages, across stunning mountain passes,
+                        and to the most spectacular viewpoints in the region.</p>
+                    <p>This meticulously planned 8-day tour combines outdoor activities, cultural experiences, and
+                        luxurious relaxation in some of Switzerland's finest accommodations.</p>
+
+                    <div class="highlight-list">
+                        <h4>Tour Highlights:</h4>
+                        <ul>
+                            <li>Cable car ride to Jungfraujoch - the "Top of Europe"</li>
+                            <li>Guided hike through the Lauterbrunnen Valley</li>
+                            <li>Cruise on Lake Geneva with views of Chillon Castle</li>
+                            <li>Chocolate and cheese tasting in Gruyères</li>
+                            <li>Scenic train ride on the Glacier Express route</li>
+                            <li>Free time to explore charming villages like Zermatt and Montreux</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="overview-image">
+                    <img src="post.jpeg" alt="Swiss Alps mountain range with snow-capped peaks and green valleys"
+                        class="main-image">
+                    <img src="flag.jpeg" alt="Traditional Swiss chalet with flower boxes and mountain backdrop"
+                        class="secondary-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section class="itinerary">
+        <div class="container">
+            <div class="section-title">
+                <h2>Detailed Itinerary</h2>
+                <p>Discover what each day of your Swiss adventure has in store</p>
+            </div>
+
+            <div class="itinerary-tabs">
+                <button class="tab-button active" data-day="day1">Day 1</button>
+                <button class="tab-button" data-day="day2">Day 2</button>
+                <button class="tab-button" data-day="day3">Day 3</button>
+                <button class="tab-button" data-day="day4">Day 4</button>
+                <button class="tab-button" data-day="day5">Day 5</button>
+                <button class="tab-button" data-day="day6">Day 6</button>
+                <button class="tab-button" data-day="day7">Day 7</button>
+                <button class="tab-button" data-day="day8">Day 8</button>
+            </div>
+
+            <div class="itinerary-content">
+                <div class="itinerary-day" id="day1">
+                    <h3>Day 1: Arrival in Zurich & Transfer to Interlaken</h3>
+                    <ul class="day-activities">
+                        <li>Morning arrival at Zurich Airport where you'll be met by your tour guide</li>
+                        <li>Scenic train transfer to Interlaken (approx 2 hours)</li>
+                        <li>Welcome lunch at a local restaurant featuring Swiss specialties</li>
+                        <li>Afternoon orientation walk through Interlaken with your guide</li>
+                        <li>Check-in to your luxury hotel with stunning mountain views</li>
+                        <li>Welcome dinner at the hotel's restaurant</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day2" style="display:none">
+                    <h3>Day 2: Lauterbrunnen Valley & Jungfraujoch</h3>
+                    <ul class="day-activities">
+                        <li>Morning cable car ride to Jungfraujoch (3,454m elevation)</li>
+                        <li>Explore the Ice Palace and observation decks with panoramic views</li>
+                        <li>Lunch at Europe's highest-altitude restaurant</li>
+                        <li>Afternoon hike through the Lauterbrunnen Valley ("Valley of 72 Waterfalls")</li>
+                        <li>Visit the Trümmelbach Falls, a series of impressive glacial waterfalls inside the mountain
+                        </li>
+                        <li>Evening at leisure in Interlaken</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day3" style="display:none">
+                    <h3>Day 3: Lucerne City & Lake Experience</h3>
+                    <ul class="day-activities">
+                        <li>Morning scenic train transfer from Interlaken to Lucerne</li>
+                        <li>Guided tour of Lucerne’s Old Town, Chapel Bridge & Lion Monument</li>
+                        <li>Lunch at a lakeside restaurant</li>
+                        <li>Relaxing boat cruise on Lake Lucerne surrounded by the Alps</li>
+                        <li>Evening at leisure for shopping or exploring Lucerne’s cafés</li>
+                        <li>Overnight stay at a charming Lucerne hotel</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day4" style="display:none">
+                    <h3>Day 4: Mount Titlis Adventure</h3>
+                    <ul class="day-activities">
+                        <li>Morning excursion to Mount Titlis (3,020m)</li>
+                        <li>Experience the world’s first rotating cable car – the Titlis Rotair</li>
+                        <li>Walk across the thrilling Titlis Cliff Walk suspension bridge</li>
+                        <li>Explore the Glacier Cave & enjoy snow activities</li>
+                        <li>Lunch at a mountain-top restaurant with panoramic views</li>
+                        <li>Return to Lucerne for an evening at leisure</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day5" style="display:none">
+                    <h3>Day 5: GoldenPass Journey to Zermatt</h3>
+                    <ul class="day-activities">
+                        <li>Scenic train ride on the famous GoldenPass route to Zermatt</li>
+                        <li>Check-in to your hotel in the car-free alpine village</li>
+                        <li>Afternoon visit to the Matterhorn Museum to learn about mountaineering history</li>
+                        <li>Evening leisure walk through Zermatt’s cozy streets</li>
+                        <li>Dinner featuring traditional Swiss raclette or fondue</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day6" style="display:none">
+                    <h3>Day 6: Gornergrat & Matterhorn Views</h3>
+                    <ul class="day-activities">
+                        <li>Morning ride on the Gornergrat cogwheel railway</li>
+                        <li>Enjoy breathtaking views of the Matterhorn and surrounding peaks</li>
+                        <li>Lunch at a panoramic restaurant overlooking glaciers</li>
+                        <li>Afternoon alpine hike or optional helicopter tour</li>
+                        <li>Evening free for shopping or spa relaxation in Zermatt</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day7" style="display:none">
+                    <h3>Day 7: Return to Zurich & City Highlights</h3>
+                    <ul class="day-activities">
+                        <li>Morning train journey back to Zurich</li>
+                        <li>Guided tour of Zurich – Bahnhofstrasse, Old Town & Lindenhof Hill</li>
+                        <li>Lunch at a gourmet restaurant</li>
+                        <li>Afternoon boat ride on Lake Zurich</li>
+                        <li>Evening farewell dinner with your group</li>
+                        <li>Overnight stay in Zurich</li>
+                    </ul>
+                </div>
+
+                <div class="itinerary-day" id="day8" style="display:none">
+                    <h3>Day 8: Departure from Zurich</h3>
+                    <ul class="day-activities">
+                        <li>Breakfast at the hotel</li>
+                        <li>Free time for last-minute shopping or relaxing at a café</li>
+                        <li>Private transfer to Zurich Airport for your flight home</li>
+                        <li>End of your unforgettable Swiss adventure</li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodations Section -->
+    <section class="accommodations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Accommodations</h2>
+                <p>Experience Swiss hospitality at its finest</p>
+            </div>
+
+            <div class="hotel-grid">
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="hotel-victoria.webp"
+                            alt="Luxury alpine resort with wooden balconies overlooking snow-capped mountains">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>Victoria-Jungfrau Grand Hotel & Spa</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">5-star luxury hotel in Interlaken with panoramic mountain views,
+                            spa facilities, and gourmet dining.</p>
+                        <div class="hotel-price">From $450/night</div>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="hotel alphorn.jpeg"
+                            alt="Charming Swiss chalet with flower boxes and wooden architecture">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>Hotel Alphorn</h3>
+                        <div class="hotel-rating">★★★★☆</div>
+                        <p class="hotel-description">Authentic Swiss chalet-style hotel in Grindelwald with cozy rooms
+                            and traditional restaurant.</p>
+                        <div class="hotel-price">From $320/night</div>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="Fairmont.jpg" alt="Modern lakeside hotel with floor-to-ceiling windows and terrace">
+                    </div>
+                    <div class="hotel-info">
+                        <h3>Fairmont Le Montreux Palace</h3>
+                        <div class="hotel-rating">★★★★★</div>
+                        <p class="hotel-description">Historic luxury hotel on Lake Geneva with Belle Époque architecture
+                            and lakeside promenade.</p>
+                        <div class="hotel-price">From $500/night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tour Packages</h2>
+                <p>Choose the option that fits your travel style</p>
+            </div>
+
+            <div class="pricing-plans">
+                <div class="pricing-card">
+                    <h3 class="pricing-tier">Standard Package</h3>
+                    <div class="pricing-amount">$2,499</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>7 nights in 4-star accommodations</li>
+                            <li>Daily breakfast</li>
+                            <li>3 guided excursions</li>
+                            <li>All transfers and train tickets</li>
+                            <li>24/7 tour guide support</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-label">Most Popular</div>
+                    <h3 class="pricing-tier">Premium Package</h3>
+                    <div class="pricing-amount">$3,299</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>7 nights in 5-star accommodations</li>
+                            <li>Daily breakfast and dinner</li>
+                            <li>All guided excursions (6 total)</li>
+                            <li>First class rail transfers</li>
+                            <li>Private guide and driver for select days</li>
+                            <li>Spa access at hotel properties</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-tier">Deluxe Package</h3>
+                    <div class="pricing-amount">$4,199</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>7 nights in premium suites</li>
+                            <li>All meals included</li>
+                            <li>Private guided excursions</li>
+                            <li>Helicopter transfer from Zurich</li>
+                            <li>Personal concierge service</li>
+                            <li>Spa treatments included</li>
+                            <li>Exclusive dining experiences</li>
+                        </ul>
+                    </div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tour Gallery</h2>
+                <p>Preview the breathtaking sights you'll experience</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="image1.jpeg"
+                        alt="Panoramic view from Jungfraujoch observation deck with glaciers and mountains">
+                </div>
+                <div class="gallery-item">
+                    <img src="image2.webp" alt="Traditional Swiss village with chalets and flower-lined streets">
+                </div>
+                <div class="gallery-item">
+                    <img src="image3.webp" alt="Lauterbrunnen Valley with dramatic cliffs and waterfalls">
+                </div>
+                <div class="gallery-item">
+                    <img src="image4.jpg" alt="Scenic Swiss train crossing a mountain viaduct">
+                </div>
+                <div class="gallery-item">
+                    <img src="image5.webp" alt="Cheese fondue dinner in a cozy wooden chalet">
+                </div>
+                <div class="gallery-item">
+                    <img src="image6.jpeg" alt="Hikers admiring the Matterhorn mountain in Zermatt">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about this tour</p>
+            </div>
+
+            <div class="accordion" role="tablist">
+                <!-- Item 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq1-btn" aria-expanded="false" aria-controls="faq1">
+                        <span>What's included in the tour price?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq1" role="region" aria-labelledby="faq1-btn"
+                        aria-hidden="true">
+                        <p>The tour price includes all accommodations, daily breakfast, guided excursions, transfers,
+                            and 24/7 support from our tour guides.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq2-btn" aria-expanded="false" aria-controls="faq2">
+                        <span>What should I pack for the trip?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq2" role="region" aria-labelledby="faq2-btn"
+                        aria-hidden="true">
+                        <p>Pack layers, comfortable walking shoes, a waterproof jacket, and personal items. Don’t forget
+                            your camera for the views!</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq3-btn" aria-expanded="false" aria-controls="faq3">
+                        <span>Is travel insurance required?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq3" role="region" aria-labelledby="faq3-btn"
+                        aria-hidden="true">
+                        <p>It’s not mandatory but highly recommended to cover cancellations, delays, or medical
+                            emergencies.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq4-btn" aria-expanded="false" aria-controls="faq4">
+                        <span>Can I customize my itinerary?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq4" role="region" aria-labelledby="faq4-btn"
+                        aria-hidden="true">
+                        <p>Yes! We can tailor activities, pacing, and experiences—just let us know your preferences.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faq5-btn" aria-expanded="false" aria-controls="faq5">
+                        <span>What is the group size for the tour?</span>
+                        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="faq5" role="region" aria-labelledby="faq5-btn"
+                        aria-hidden="true">
+                        <p>Groups are typically capped at 15 guests for a more personalized experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Explore the Swiss Alps?</h2>
+            <p>Join us for an unforgettable adventure filled with breathtaking scenery, rich culture, and luxurious
+                accommodations.</p>
+            <div class="cta-buttons">
+                <a href="booknow swiss.html" class="cta-btn primary-btn">Book Your Tour</a>
+                <a href="#" class="cta-btn secondary-btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Roamly</h3>
+                    <p>Making travel dreams come true since 2015. We specialize in curated travel experiences tailored
+                        to your preferences.</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Travel Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>105/591, New Haleem Market, Chamanganj, Kanpur</li>
+                        <li>Phone: +91 9336189929</li>
+                        <li>Email: info@roamly.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Roamly Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Itinerary Tab Functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const itineraryDays = document.querySelectorAll('.itinerary-day');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                itineraryDays.forEach(day => day.style.display = 'none');
+
+                button.classList.add('active');
+                const dayId = button.getAttribute('data-day');
+                document.getElementById(dayId).style.display = 'block';
+            });
+        });
+        (function () {
+            const items = document.querySelectorAll('.accordion-item');
+
+            function closeAll(except) {
+                items.forEach(item => {
+                    if (item !== except) {
+                        item.classList.remove('active');
+                        const trigger = item.querySelector('.accordion-trigger');
+                        const content = item.querySelector('.accordion-content');
+                        trigger.setAttribute('aria-expanded', 'false');
+                        content.setAttribute('aria-hidden', 'true');
+                        content.style.maxHeight = 0;
+                    }
+                });
+            }
+
+            items.forEach(item => {
+                const trigger = item.querySelector('.accordion-trigger');
+                const content = item.querySelector('.accordion-content');
+
+                // Ensure starting state
+                trigger.setAttribute('aria-expanded', 'false');
+                content.setAttribute('aria-hidden', 'true');
+                content.style.maxHeight = 0;
+
+                trigger.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('active');
+                    closeAll(null); // single-open behavior
+
+                    if (!isOpen) {
+                        item.classList.add('active');
+                        trigger.setAttribute('aria-expanded', 'true');
+                        content.setAttribute('aria-hidden', 'false');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // Keep height correct on resize (for responsive text wrapping)
+            window.addEventListener('resize', () => {
+                const open = document.querySelector('.accordion-item.active .accordion-content');
+                if (open) open.style.maxHeight = open.scrollHeight + 'px';
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
